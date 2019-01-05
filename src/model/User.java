@@ -1,29 +1,33 @@
 package model;
 
+import java.util.List;
+
 public class User extends People{
-	private String login;
+	private String username;
 	private String password;
 	private String profession;
 	private boolean active;
-	private boolean admin;
+	private List<Income> incomes;
+	private List<Expense> expenses;	
 	
-	private User() {}
+	public User() {}
 
-	public User(String name, String surname, String phone, String email, String birthday, String login, String password, String profession, boolean active, boolean admin) {
+	public User(String name, String surname, String phone, String email, String birthday, String username, String password, String profession, boolean active, boolean admin, List<Income> incomes, List<Expense> expenses) {
 		super(name, surname, phone, email, birthday);
-		this.login = login;
+		this.username = username;
 		this.password = password;
 		this.profession = profession;
 		this.active = active;
-		this.admin = admin;
+		this.incomes = incomes;
+		this.expenses = expenses;		
+	}	
+
+	public String getUsername() {
+		return username;
 	}
 
-	public String getLogin() {
-		return login;
-	}
-
-	public void setLogin(String login) {
-		this.login = login;
+	public void setUsername(String username) {
+		this.username = username;
 	}
 
 	public String getPassword() {
@@ -48,14 +52,22 @@ public class User extends People{
 
 	public void setActive(boolean active) {
 		this.active = active;
-	}
+	}	
 	
-	public boolean isAdmin() {
-		return admin;
+	public List<Income> getIncomes() {
+		return incomes;
 	}
 
-	public void setAdmin(boolean admin) {
-		this.admin = admin;
+	public void setIncomes(List<Income> incomes) {
+		this.incomes = incomes;
+	}
+
+	public List<Expense> getExpenses() {
+		return expenses;
+	}
+
+	public void setExpenses(List<Expense> expenses) {
+		this.expenses = expenses;
 	}
 
 	@Override
