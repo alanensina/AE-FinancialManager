@@ -19,9 +19,6 @@ public class LoginScreen extends JFrame {
 	private JPasswordField txtPassword;
 	private final JLabel lblCopyrightAlan = new JLabel("Alan Ensina @ 2019");
 
-	/**
-	 * Launch the application.
-	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -35,9 +32,6 @@ public class LoginScreen extends JFrame {
 		});
 	}
 
-	/**
-	 * Create the frame.
-	 */
 	public LoginScreen() {
 		setResizable(false);
 		setTitle("AE Financial Manager");
@@ -78,14 +72,15 @@ public class LoginScreen extends JFrame {
 		JButton btNewUser = new JButton("New user?");
 		btNewUser.setBounds(125, 221, 108, 25);
 		contentPane.add(btNewUser);
-		
-		JLabel lblLogo = new JLabel("");
-		lblLogo.setIcon(new ImageIcon(LoginScreen.class.getResource("/icons/money-bag (1).png")));
-		lblLogo.setBounds(22, 12, 323, 135);
-		contentPane.add(lblLogo);
 		lblCopyrightAlan.setHorizontalAlignment(SwingConstants.CENTER);
 		lblCopyrightAlan.setFont(new Font("Dialog", Font.PLAIN, 8));
 		lblCopyrightAlan.setBounds(12, 248, 333, 33);
 		contentPane.add(lblCopyrightAlan);
+		
+		JLabel lblA = new JLabel("");
+		lblA.setHorizontalAlignment(SwingConstants.CENTER);
+		lblA.setIcon(new ImageIcon("/home/alan/eclipse-workspace/AEFM/AE-FinancialManager/resources/icons/moneyBag.png"));
+		lblA.setBounds(12, 12, 333, 147);
+		contentPane.add(lblA);
 	}
 }
