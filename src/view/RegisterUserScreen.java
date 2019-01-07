@@ -1,24 +1,26 @@
 package view;
 
 import java.awt.EventQueue;
+import java.awt.Font;
 
-import javax.swing.JInternalFrame;
-import javax.swing.JLabel;
-import javax.swing.JTextField;
-import javax.swing.JPasswordField;
-import javax.swing.SwingConstants;
-import javax.swing.JButton;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.SwingConstants;
+import javax.swing.border.TitledBorder;
 
-public class RegisterUserScreen extends JInternalFrame {
+public class RegisterUserScreen extends JFrame {
 	private JTextField txtName;
 	private JTextField txtSurname;
-	private JTextField txtPhone;
+	private JTextField txtBirthday;
 	private JTextField txtEmail;
 	private JTextField textField;
-	private JTextField txtUsername;
-	private JPasswordField txtPassword;
 	private JTextField txtProfession;
+	private JTextField txtUsername;
+	private JTextField txtPassword;
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -32,102 +34,125 @@ public class RegisterUserScreen extends JInternalFrame {
 			}
 		});
 	}
-	
+		
 	public RegisterUserScreen() {
 		setTitle("Register User");
 		setResizable(true);
-		setBounds(100, 100, 400, 500);
+		setBounds(100, 100, 400, 569);
 		getContentPane().setLayout(null);
 		
+		JLabel lblLogo = new JLabel("");
+		lblLogo.setHorizontalAlignment(SwingConstants.CENTER);
+		lblLogo.setIcon(new ImageIcon(RegisterUserScreen.class.getResource("/icons/businessman.png")));
+		lblLogo.setBounds(12, 12, 366, 128);
+		getContentPane().add(lblLogo);
+		
+		JPanel panelPersonalDetails = new JPanel();
+		panelPersonalDetails.setBorder(new TitledBorder(null, "Personal details", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		panelPersonalDetails.setBounds(12, 162, 366, 136);
+		getContentPane().add(panelPersonalDetails);
+		panelPersonalDetails.setLayout(null);
+		
 		JLabel lbName = new JLabel("Name");
-		lbName.setBounds(42, 163, 70, 15);
-		getContentPane().add(lbName);
-		
-		JLabel lbSurname = new JLabel("Surname");
-		lbSurname.setBounds(42, 190, 70, 15);
-		getContentPane().add(lbSurname);
-		
-		JLabel lbPhone = new JLabel("Phone");
-		lbPhone.setBounds(42, 217, 70, 15);
-		getContentPane().add(lbPhone);
-		
-		JLabel lbEmail = new JLabel("Email");
-		lbEmail.setBounds(42, 244, 70, 15);
-		getContentPane().add(lbEmail);
-		
-		JLabel lbBirthday = new JLabel("Birthday");
-		lbBirthday.setBounds(42, 275, 70, 15);
-		getContentPane().add(lbBirthday);
+		lbName.setFont(new Font("Dialog", Font.PLAIN, 12));
+		lbName.setBounds(12, 26, 40, 15);
+		lbName.setHorizontalAlignment(SwingConstants.LEFT);
+		panelPersonalDetails.add(lbName);
 		
 		txtName = new JTextField();
-		txtName.setBounds(130, 161, 213, 19);
-		getContentPane().add(txtName);
+		txtName.setBounds(92, 24, 262, 19);
+		panelPersonalDetails.add(txtName);
 		txtName.setColumns(10);
 		
+		JLabel lbSurname = new JLabel("Surname");
+		lbSurname.setFont(new Font("Dialog", Font.PLAIN, 12));
+		lbSurname.setBounds(12, 53, 70, 15);
+		panelPersonalDetails.add(lbSurname);
+		
 		txtSurname = new JTextField();
-		txtSurname.setBounds(130, 188, 213, 19);
-		getContentPane().add(txtSurname);
+		txtSurname.setBounds(92, 51, 262, 19);
+		panelPersonalDetails.add(txtSurname);
 		txtSurname.setColumns(10);
 		
-		txtPhone = new JTextField();
-		txtPhone.setBounds(130, 215, 213, 19);
-		getContentPane().add(txtPhone);
-		txtPhone.setColumns(10);
+		JLabel lbBirthday = new JLabel("Birthday");
+		lbBirthday.setFont(new Font("Dialog", Font.PLAIN, 12));
+		lbBirthday.setBounds(12, 80, 58, 15);
+		panelPersonalDetails.add(lbBirthday);
 		
-		txtEmail = new JTextField();
-		txtEmail.setBounds(130, 242, 213, 19);
-		getContentPane().add(txtEmail);
-		txtEmail.setColumns(10);
-		
-		textField = new JTextField();
-		textField.setBounds(130, 273, 114, 19);
-		getContentPane().add(textField);
-		textField.setColumns(10);
-		
-		JLabel lblNewUser = new JLabel("New user");
-		lblNewUser.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewUser.setBounds(12, 137, 366, 25);
-		getContentPane().add(lblNewUser);
-		
-		JLabel lbUsername = new JLabel("Username");
-		lbUsername.setBounds(42, 304, 80, 15);
-		getContentPane().add(lbUsername);
-		
-		JLabel lblPassword = new JLabel("Password");
-		lblPassword.setBounds(42, 331, 70, 15);
-		getContentPane().add(lblPassword);
-		
-		txtUsername = new JTextField();
-		txtUsername.setBounds(130, 302, 114, 19);
-		getContentPane().add(txtUsername);
-		txtUsername.setColumns(10);
-		
-		txtPassword = new JPasswordField();
-		txtPassword.setBounds(130, 329, 114, 19);
-		getContentPane().add(txtPassword);
+		txtBirthday = new JTextField();
+		txtBirthday.setBounds(92, 78, 262, 19);
+		panelPersonalDetails.add(txtBirthday);
+		txtBirthday.setColumns(10);
 		
 		JLabel lbProfession = new JLabel("Profession");
-		lbProfession.setBounds(42, 358, 80, 15);
-		getContentPane().add(lbProfession);
+		lbProfession.setFont(new Font("Dialog", Font.PLAIN, 12));
+		lbProfession.setBounds(12, 109, 70, 15);
+		panelPersonalDetails.add(lbProfession);
 		
 		txtProfession = new JTextField();
-		txtProfession.setBounds(130, 356, 114, 19);
-		getContentPane().add(txtProfession);
+		txtProfession.setBounds(92, 107, 262, 19);
+		panelPersonalDetails.add(txtProfession);
 		txtProfession.setColumns(10);
 		
-		JButton btnRegister = new JButton("Register");
-		btnRegister.setBounds(226, 398, 130, 25);
-		getContentPane().add(btnRegister);
+		JPanel panelContacts = new JPanel();
+		panelContacts.setBorder(new TitledBorder(null, "Contacts", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		panelContacts.setBounds(12, 310, 366, 80);
+		getContentPane().add(panelContacts);
+		panelContacts.setLayout(null);
 		
-		JButton btnCancel = new JButton("Cancel");
-		btnCancel.setBounds(44, 398, 130, 25);
-		getContentPane().add(btnCancel);
+		JLabel lbEmail = new JLabel("Email");
+		lbEmail.setFont(new Font("Dialog", Font.PLAIN, 12));
+		lbEmail.setBounds(12, 22, 70, 15);
+		panelContacts.add(lbEmail);
 		
-		JLabel lbIcon = new JLabel("");
-		lbIcon.setHorizontalAlignment(SwingConstants.CENTER);
-		lbIcon.setIcon(new ImageIcon("/home/alan/eclipse-workspace/AEFM/AE-FinancialManager/resources/icons/businessman.png"));
-		lbIcon.setBounds(12, 12, 366, 128);
-		getContentPane().add(lbIcon);
+		txtEmail = new JTextField();
+		txtEmail.setBounds(92, 20, 262, 19);
+		panelContacts.add(txtEmail);
+		txtEmail.setColumns(10);
+		
+		JLabel lbPhone = new JLabel("Phone");
+		lbPhone.setFont(new Font("Dialog", Font.PLAIN, 12));
+		lbPhone.setBounds(12, 49, 55, 15);
+		panelContacts.add(lbPhone);
+		
+		textField = new JTextField();
+		textField.setBounds(92, 47, 262, 19);
+		panelContacts.add(textField);
+		textField.setColumns(10);
+		
+		JPanel panelUsersDetails = new JPanel();
+		panelUsersDetails.setBorder(new TitledBorder(null, "User's details", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		panelUsersDetails.setBounds(12, 395, 366, 80);
+		getContentPane().add(panelUsersDetails);
+		panelUsersDetails.setLayout(null);
+		
+		JLabel lbUsername = new JLabel("Username");
+		lbUsername.setFont(new Font("Dialog", Font.PLAIN, 12));
+		lbUsername.setBounds(12, 25, 70, 15);
+		panelUsersDetails.add(lbUsername);
+		
+		txtUsername = new JTextField();
+		txtUsername.setBounds(90, 23, 262, 19);
+		panelUsersDetails.add(txtUsername);
+		txtUsername.setColumns(10);
+		
+		JLabel lbPassword = new JLabel("Password");
+		lbPassword.setFont(new Font("Dialog", Font.PLAIN, 12));
+		lbPassword.setBounds(12, 52, 70, 15);
+		panelUsersDetails.add(lbPassword);
+		
+		txtPassword = new JTextField();
+		txtPassword.setBounds(90, 50, 262, 19);
+		panelUsersDetails.add(txtPassword);
+		txtPassword.setColumns(10);
+		
+		JButton btRegister = new JButton("Register");
+		btRegister.setBounds(235, 487, 117, 25);
+		getContentPane().add(btRegister);
+		
+		JButton btCancel = new JButton("Cancel");
+		btCancel.setBounds(34, 487, 117, 25);
+		getContentPane().add(btCancel);
 
 	}
 }

@@ -8,6 +8,9 @@ import java.awt.BorderLayout;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JMenu;
+import java.awt.SystemColor;
+import javax.swing.UIManager;
+import java.awt.Color;
 
 public class MainScreen {
 
@@ -32,6 +35,7 @@ public class MainScreen {
 
 	private void initialize() {
 		frmAeFinancialManager = new JFrame();
+		frmAeFinancialManager.getContentPane().setBackground(Color.DARK_GRAY);
 		frmAeFinancialManager.setTitle("AE Financial Manager");
 		frmAeFinancialManager.setResizable(false);
 		frmAeFinancialManager.setBounds(100, 100, 1280, 720);
@@ -43,7 +47,7 @@ public class MainScreen {
 		frmAeFinancialManager.getContentPane().add(desktopPane);
 		
 		JMenuBar menuBar = new JMenuBar();
-		menuBar.setBounds(0, 0, 255, 21);
+		menuBar.setBounds(0, 0, 128, 21);
 		frmAeFinancialManager.getContentPane().add(menuBar);
 		
 		JMenu mnItem = new JMenu("Register");
@@ -55,16 +59,16 @@ public class MainScreen {
 		JMenuItem menuRegisterIncome = new JMenuItem("Income");
 		mnItem.add(menuRegisterIncome);
 		
-		JMenu mnList = new JMenu("List");
+		JMenu mnList = new JMenu("View");
 		menuBar.add(mnList);
+		
+		JMenuItem menuBalance = new JMenuItem("Balance");
+		mnList.add(menuBalance);
 		
 		JMenuItem menuListExpenses = new JMenuItem("Expenses");
 		mnList.add(menuListExpenses);
 		
 		JMenuItem menuListIncomes = new JMenuItem("Incomes");
 		mnList.add(menuListIncomes);
-		
-		JMenuItem menuShowBalance = new JMenuItem("Show my balance");
-		menuBar.add(menuShowBalance);
 	}
 }
