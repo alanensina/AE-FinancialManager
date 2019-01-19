@@ -13,8 +13,8 @@ import javax.swing.SwingConstants;
 import javax.swing.border.TitledBorder;
 
 public class RegisterUserScreen extends JFrame {
-	private JTextField txtName;
-	private JTextField txtSurname;
+	private JTextField txtFirstName;
+	private JTextField txtLastName;
 	private JTextField txtBirthday;
 	private JTextField txtEmail;
 	private JTextField textField;
@@ -53,26 +53,26 @@ public class RegisterUserScreen extends JFrame {
 		getContentPane().add(panelPersonalDetails);
 		panelPersonalDetails.setLayout(null);
 		
-		JLabel lbName = new JLabel("Name");
-		lbName.setFont(new Font("Dialog", Font.PLAIN, 12));
-		lbName.setBounds(12, 26, 40, 15);
-		lbName.setHorizontalAlignment(SwingConstants.LEFT);
-		panelPersonalDetails.add(lbName);
+		JLabel lbFirstName = new JLabel("First name");
+		lbFirstName.setFont(new Font("Dialog", Font.PLAIN, 12));
+		lbFirstName.setBounds(12, 26, 70, 15);
+		lbFirstName.setHorizontalAlignment(SwingConstants.LEFT);
+		panelPersonalDetails.add(lbFirstName);
 		
-		txtName = new JTextField();
-		txtName.setBounds(92, 24, 262, 19);
-		panelPersonalDetails.add(txtName);
-		txtName.setColumns(10);
+		txtFirstName = new JTextField();
+		txtFirstName.setBounds(92, 24, 262, 19);
+		panelPersonalDetails.add(txtFirstName);
+		txtFirstName.setColumns(10);
 		
-		JLabel lbSurname = new JLabel("Surname");
-		lbSurname.setFont(new Font("Dialog", Font.PLAIN, 12));
-		lbSurname.setBounds(12, 53, 70, 15);
-		panelPersonalDetails.add(lbSurname);
+		JLabel lbLastName = new JLabel("Last name");
+		lbLastName.setFont(new Font("Dialog", Font.PLAIN, 12));
+		lbLastName.setBounds(12, 53, 70, 15);
+		panelPersonalDetails.add(lbLastName);
 		
-		txtSurname = new JTextField();
-		txtSurname.setBounds(92, 51, 262, 19);
-		panelPersonalDetails.add(txtSurname);
-		txtSurname.setColumns(10);
+		txtLastName = new JTextField();
+		txtLastName.setBounds(92, 51, 262, 19);
+		panelPersonalDetails.add(txtLastName);
+		txtLastName.setColumns(10);
 		
 		JLabel lbBirthday = new JLabel("Birthday");
 		lbBirthday.setFont(new Font("Dialog", Font.PLAIN, 12));

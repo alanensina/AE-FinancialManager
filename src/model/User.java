@@ -2,7 +2,12 @@ package model;
 
 import java.util.List;
 
-public class User extends People{
+public class User{
+	private String firstName;
+	private String lastName;
+	private String phone;
+	private String email;
+	private String birthday;
 	private String username;
 	private String password;
 	private String profession;
@@ -10,17 +15,62 @@ public class User extends People{
 	private List<Income> incomes;
 	private List<Expense> expenses;	
 	
-	public User() {}
+	public User() {}	
 
-	public User(String name, String surname, String phone, String email, String birthday, String username, String password, String profession, boolean active, boolean admin, List<Income> incomes, List<Expense> expenses) {
-		super(name, surname, phone, email, birthday);
+	public User(String firstName, String lastName, String phone, String email, String birthday, String username,
+			String password, String profession, boolean active, List<Income> incomes, List<Expense> expenses) {
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.phone = phone;
+		this.email = email;
+		this.birthday = birthday;
 		this.username = username;
 		this.password = password;
 		this.profession = profession;
 		this.active = active;
 		this.incomes = incomes;
-		this.expenses = expenses;		
-	}	
+		this.expenses = expenses;
+	}
+
+	public String getFirstName() {
+		return firstName;
+	}
+
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+	public String getLastName() {
+		return lastName;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+
+	public String getPhone() {
+		return phone;
+	}
+
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getBirthday() {
+		return birthday;
+	}
+
+	public void setBirthday(String birthday) {
+		this.birthday = birthday;
+	}
 
 	public String getUsername() {
 		return username;
@@ -44,7 +94,7 @@ public class User extends People{
 
 	public void setProfession(String profession) {
 		this.profession = profession;
-	}	
+	}
 
 	public boolean isActive() {
 		return active;
@@ -52,8 +102,8 @@ public class User extends People{
 
 	public void setActive(boolean active) {
 		this.active = active;
-	}	
-	
+	}
+
 	public List<Income> getIncomes() {
 		return incomes;
 	}
@@ -72,6 +122,6 @@ public class User extends People{
 
 	@Override
 	public String toString() {
-		return this.getName() + " " + this.getSurname();
+		return this.firstName + " " + this.lastName;
 	}	
 }

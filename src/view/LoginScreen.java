@@ -21,7 +21,7 @@ public class LoginScreen extends JFrame {
 	private JPanel contentPane;
 	private JTextField txtUsername;
 	private JPasswordField txtPassword;
-	private final JLabel lblCopyrightAlan = new JLabel("Alan Ensina @ 2019");
+	private final JLabel lblCopyrightAlan = new JLabel("Created and designed by Alan Ensina @ 2019");
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -40,7 +40,7 @@ public class LoginScreen extends JFrame {
 		setResizable(false);
 		setTitle("AE Financial Manager");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 365, 308);
+		setBounds(100, 100, 363, 308);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -84,8 +84,8 @@ public class LoginScreen extends JFrame {
 		contentPane.add(btNewUser);
 
 		lblCopyrightAlan.setHorizontalAlignment(SwingConstants.CENTER);
-		lblCopyrightAlan.setFont(new Font("Dialog", Font.PLAIN, 8));
-		lblCopyrightAlan.setBounds(12, 248, 333, 33);
+		lblCopyrightAlan.setFont(new Font("Dialog", Font.PLAIN, 9));
+		lblCopyrightAlan.setBounds(22, 258, 333, 33);
 		contentPane.add(lblCopyrightAlan);
 
 		JLabel lblA = new JLabel("");
@@ -93,5 +93,11 @@ public class LoginScreen extends JFrame {
 		lblA.setIcon(new ImageIcon(LoginScreen.class.getResource("/icons/moneyBag.png")));
 		lblA.setBounds(12, 12, 333, 147);
 		contentPane.add(lblA);
+		
+		JLabel lbGithub = new JLabel("github.com/alanensina");
+		lbGithub.setHorizontalAlignment(SwingConstants.CENTER);
+		lbGithub.setFont(new Font("Dialog", Font.PLAIN, 10));
+		lbGithub.setBounds(12, 281, 333, 19);
+		contentPane.add(lbGithub);
 	}
 }
