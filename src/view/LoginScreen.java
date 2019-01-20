@@ -70,6 +70,11 @@ public class LoginScreen extends JFrame {
 		contentPane.add(btSingIn);
 
 		JButton btCancel = new JButton("Cancel");
+		btCancel.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+			}
+		});
 		btCancel.setBounds(237, 221, 108, 25);
 		contentPane.add(btCancel);
 
@@ -78,6 +83,7 @@ public class LoginScreen extends JFrame {
 		btNewUser.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				new RegisterUserScreen().setVisible(true);
+				dispose();
 			}
 		});
 		btNewUser.setBounds(125, 221, 108, 25);
@@ -93,7 +99,7 @@ public class LoginScreen extends JFrame {
 		lblA.setIcon(new ImageIcon(LoginScreen.class.getResource("/icons/moneyBag.png")));
 		lblA.setBounds(12, 12, 333, 147);
 		contentPane.add(lblA);
-		
+
 		JLabel lbGithub = new JLabel("github.com/alanensina");
 		lbGithub.setHorizontalAlignment(SwingConstants.CENTER);
 		lbGithub.setFont(new Font("Dialog", Font.PLAIN, 10));
