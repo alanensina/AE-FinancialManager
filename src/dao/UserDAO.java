@@ -78,4 +78,33 @@ public class UserDAO {
 
 		return users;
 	}
+	
+	public int findByID(User user) throws SQLException {
+		int id = 0;
+		String sql = "select id from user where username = ?";
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		
+		stmt = con.prepareStatement(sql);
+		rs = stmt.executeQuery();
+		
+		
+		/*
+		 	PreparedStatement stat;
+            String SQLFind = "SELECT * FROM CLIENTE WHERE ID = ?";
+            stat = conn.prepareStatement(SQLFind);
+            stat.setInt(1, ID);
+            ResultSet rs = stat.executeQuery();
+            Cliente cliente = new Cliente();
+            cliente.setID(rs.getInt("ID")); 
+            stat.clos
+		 */
+
+		
+		
+		
+		
+		return id;
+		
+	}
 }

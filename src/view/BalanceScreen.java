@@ -8,6 +8,10 @@ import javax.swing.border.TitledBorder;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import java.awt.Font;
+import javax.swing.JList;
+import javax.swing.AbstractListModel;
+import javax.swing.JComboBox;
+import javax.swing.DefaultComboBoxModel;
 
 public class BalanceScreen extends JInternalFrame {
 
@@ -32,7 +36,7 @@ public class BalanceScreen extends JInternalFrame {
 	 */
 	public BalanceScreen() {
 		setTitle("Balance");
-		setBounds(100, 100, 440, 482);
+		setBounds(100, 100, 457, 544);
 		getContentPane().setLayout(null);
 		
 		JPanel panelIncome = new JPanel();
@@ -69,7 +73,7 @@ public class BalanceScreen extends JInternalFrame {
 		
 		JPanel panelBalance = new JPanel();
 		panelBalance.setBorder(new TitledBorder(null, "Balance", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		panelBalance.setBounds(12, 288, 404, 99);
+		panelBalance.setBounds(12, 338, 404, 99);
 		getContentPane().add(panelBalance);
 		panelBalance.setLayout(null);
 		
@@ -104,16 +108,28 @@ public class BalanceScreen extends JInternalFrame {
 		panelBalance.add(lbTotalBalance);
 		
 		JButton btCancel = new JButton("Cancel");
-		btCancel.setBounds(12, 399, 117, 25);
+		btCancel.setBounds(12, 461, 117, 25);
 		getContentPane().add(btCancel);
 		
-		JButton btPrint = new JButton("Print");
-		btPrint.setBounds(299, 399, 117, 25);
-		getContentPane().add(btPrint);
+		JButton btRefresh = new JButton("Refresh");
+		btRefresh.setBounds(299, 461, 117, 25);
+		getContentPane().add(btRefresh);
 		
 		JButton btSave = new JButton("Save");
-		btSave.setBounds(156, 399, 117, 25);
+		btSave.setBounds(156, 461, 117, 25);
 		getContentPane().add(btSave);
+		
+		JComboBox cbMonths = new JComboBox();
+		cbMonths.setFont(new Font("Dialog", Font.PLAIN, 12));
+		cbMonths.setModel(new DefaultComboBoxModel(new String[] {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"}));
+		cbMonths.setBounds(220, 305, 117, 24);
+		getContentPane().add(cbMonths);
+		
+		JComboBox cbYears = new JComboBox();
+		cbYears.setFont(new Font("Dialog", Font.PLAIN, 12));
+		cbYears.setModel(new DefaultComboBoxModel(new String[] {"2019", "2020", "2021"}));
+		cbYears.setBounds(349, 305, 67, 24);
+		getContentPane().add(cbYears);
 
 	}
 }
