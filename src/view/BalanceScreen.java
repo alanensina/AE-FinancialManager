@@ -15,7 +15,7 @@ import java.awt.Color;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.JButton;
 
-public class BalanceScreen2 extends JInternalFrame {
+public class BalanceScreen extends JInternalFrame {
 	private JTable tbExpenses;
 	private JTable tbIncomes;
 
@@ -26,7 +26,7 @@ public class BalanceScreen2 extends JInternalFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					BalanceScreen2 frame = new BalanceScreen2();
+					BalanceScreen frame = new BalanceScreen();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -38,7 +38,7 @@ public class BalanceScreen2 extends JInternalFrame {
 	/**
 	 * Create the frame.
 	 */
-	public BalanceScreen2() {
+	public BalanceScreen() {
 		setTitle("Balance Screen");
 		setBounds(100, 100, 622, 562);
 		getContentPane().setLayout(null);
