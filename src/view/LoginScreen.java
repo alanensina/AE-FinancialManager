@@ -1,7 +1,9 @@
 package view;
 
+import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.Font;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -9,7 +11,6 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
@@ -41,6 +42,13 @@ public class LoginScreen extends JFrame {
 		setTitle("AE Financial Manager");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 363, 308);
+		
+		// Setting the position to open centralized
+		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        int x = (int) (screenSize.getWidth() - 363) / 2;
+        int y = (int) (screenSize.getHeight() - 308) / 2;
+        setLocation(x, y);
+        
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);

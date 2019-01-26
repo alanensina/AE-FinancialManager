@@ -1,7 +1,9 @@
 package view;
 
+import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.Font;
+import java.awt.Toolkit;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -44,8 +46,14 @@ public class RegisterUserScreen extends JFrame {
 	public RegisterUserScreen() {
 		setTitle("Register User");
 		setResizable(true);
-		setBounds(100, 100, 400, 569);
+		setBounds(100, 100, 400, 532);
 		getContentPane().setLayout(null);
+		
+		// Setting the position to open centralized
+				Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+		        int x = (int) (screenSize.getWidth() - 400) / 2;
+		        int y = (int) (screenSize.getHeight() - 532) / 2;
+		        setLocation(x, y);
 
 		JLabel lblLogo = new JLabel("");
 		lblLogo.setHorizontalAlignment(SwingConstants.CENTER);
