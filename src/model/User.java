@@ -1,8 +1,13 @@
 package model;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class User{
+public class User implements Serializable{
+	
+	private static final long serialVersionUID = 1L;
+	
+	private int id;
 	private String firstName;
 	private String lastName;
 	private String phone;
@@ -30,6 +35,30 @@ public class User{
 		this.active = active;
 		this.incomes = incomes;
 		this.expenses = expenses;
+	}
+	
+	public User(int id, String firstName, String lastName, String phone, String email, String birthday, String username,
+			String password, String profession, boolean active, List<Income> incomes, List<Expense> expenses) {
+		this.id = id;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.phone = phone;
+		this.email = email;
+		this.birthday = birthday;
+		this.username = username;
+		this.password = password;
+		this.profession = profession;
+		this.active = active;
+		this.incomes = incomes;
+		this.expenses = expenses;
+	}	
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public String getFirstName() {

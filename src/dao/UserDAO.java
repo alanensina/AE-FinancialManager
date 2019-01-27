@@ -78,4 +78,52 @@ public class UserDAO {
 
 		return users;
 	}
+
+	public int findID(User user) {
+		int id = 0;
+
+		return id;
+	}
+
+	public User findUserByID(int id) throws SQLException {
+		User user = new User();
+		String sql = "select * from user where id = ?";
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		
+		
+		try {
+			stmt = con.prepareStatement(sql);
+			stmt.setInt(1, id);
+			rs = stmt.executeQuery(sql);
+
+			user.setId(id);
+			user.setFirstName(rs.getString("first_name"));
+			user.setLastName(rs.getString("last_name"));
+			user.setPhone(rs.getString("phone"));
+			user.setEmail(rs.getString("email"));
+			user.setBirthday(rs.getString("birthday"));
+			user.setUsername(rs.getString("username"));
+			user.setPassword(rs.getString("user_password"));
+			user.setProfession(rs.getString("profession"));
+
+			int active = Integer.parseInt(rs.getString("active"));
+
+			if (active == 1) {
+				user.setActive(true);
+			} else {
+				user.setActive(false);
+			}
+
+			return user;
+		} catch (SQLException ex) {
+			System.out.println(ex);
+			//JOptionPane.showMessageDialog(null, "There was an error to find the user in database (UserDAO)" + ex);
+
+		} finally {
+			ConnectionFactory.closeConnection(con, stmt, rs);
+		}
+
+		return null;
+	}
 }
