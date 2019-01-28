@@ -48,7 +48,7 @@ public class UserDAO {
 	public List<User> read() {
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
-		String sql = "select * from user;";
+		String sql = "select * from user";
 
 		List<User> users = new LinkedList<>();
 
@@ -59,13 +59,14 @@ public class UserDAO {
 			while (rs.next()) {
 
 				User user = new User();
+				user.setId(rs.getInt(1));
 				user.setFirstName(rs.getString("first_name"));
 				user.setLastName(rs.getString("last_name"));
 				user.setPhone(rs.getString("phone"));
 				user.setEmail(rs.getString("email"));
 				user.setBirthday(rs.getString("birthday"));
 				user.setUsername(rs.getString("username"));
-				user.setPassword(rs.getString("password"));
+				user.setPassword(rs.getString("user_password"));
 				user.setProfession(rs.getString("profession"));
 
 				users.add(user);
@@ -79,10 +80,46 @@ public class UserDAO {
 		return users;
 	}
 
-	public int findID(User user) {
-		int id = 0;
+	public int findID(String username) {
+		User user = new User();
+		String sql = "select * from user where username = ?";
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
 
-		return id;
+		try {
+			stmt = con.prepareStatement(sql);
+			stmt.setString(1, username);
+			rs = stmt.executeQuery();
+
+			while (rs.next()) {
+				user.setId(rs.getInt(1));
+				user.setFirstName(rs.getString("first_name"));
+				user.setLastName(rs.getString("last_name"));
+				user.setPhone(rs.getString("phone"));
+				user.setEmail(rs.getString("email"));
+				user.setBirthday(rs.getString("birthday"));
+				user.setUsername(rs.getString("username"));
+				user.setPassword(rs.getString("user_password"));
+				user.setProfession(rs.getString("profession"));
+
+				int active = Integer.parseInt(rs.getString("active"));
+
+				if (active == 1) {
+					user.setActive(true);
+				} else {
+					user.setActive(false);
+				}
+			}
+			return user.getId();
+		} catch (SQLException ex) {
+			JOptionPane.showMessageDialog(null,
+					"There was an error to find the ID in the database (UserDAO.findID())" + ex);
+
+		} finally {
+			ConnectionFactory.closeConnection(con, stmt, rs);
+		}
+
+		return 0;
 	}
 
 	public User findUserByID(int id) throws SQLException {
@@ -90,35 +127,35 @@ public class UserDAO {
 		String sql = "select * from user where id = ?";
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
-		
-		
+
 		try {
 			stmt = con.prepareStatement(sql);
 			stmt.setInt(1, id);
-			rs = stmt.executeQuery(sql);
+			rs = stmt.executeQuery();
 
-			user.setId(id);
-			user.setFirstName(rs.getString("first_name"));
-			user.setLastName(rs.getString("last_name"));
-			user.setPhone(rs.getString("phone"));
-			user.setEmail(rs.getString("email"));
-			user.setBirthday(rs.getString("birthday"));
-			user.setUsername(rs.getString("username"));
-			user.setPassword(rs.getString("user_password"));
-			user.setProfession(rs.getString("profession"));
+			while (rs.next()) {
+				user.setId(id);
+				user.setFirstName(rs.getString("first_name"));
+				user.setLastName(rs.getString("last_name"));
+				user.setPhone(rs.getString("phone"));
+				user.setEmail(rs.getString("email"));
+				user.setBirthday(rs.getString("birthday"));
+				user.setUsername(rs.getString("username"));
+				user.setPassword(rs.getString("user_password"));
+				user.setProfession(rs.getString("profession"));
 
-			int active = Integer.parseInt(rs.getString("active"));
+				int active = Integer.parseInt(rs.getString("active"));
 
-			if (active == 1) {
-				user.setActive(true);
-			} else {
-				user.setActive(false);
+				if (active == 1) {
+					user.setActive(true);
+				} else {
+					user.setActive(false);
+				}
 			}
-
 			return user;
 		} catch (SQLException ex) {
-			System.out.println(ex);
-			//JOptionPane.showMessageDialog(null, "There was an error to find the user in database (UserDAO)" + ex);
+			JOptionPane.showMessageDialog(null,
+					"There was an error to find this user in the database (UserDAO.findUserByID())" + ex);
 
 		} finally {
 			ConnectionFactory.closeConnection(con, stmt, rs);
