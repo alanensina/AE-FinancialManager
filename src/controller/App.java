@@ -1,18 +1,12 @@
 package controller;
 
-import java.util.List;
-
-import dao.UserDAO;
-import model.Expense;
-import model.Income;
-import model.User;
+import view.LoginScreen;
 
 public class App {
 
 	public static void main(String[] args) {
 
-		// LoginScreen.main(args);
-		
+		LoginScreen.main(args);
 	}
 
 }
