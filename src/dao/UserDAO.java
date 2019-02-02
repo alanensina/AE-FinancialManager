@@ -39,7 +39,7 @@ public class UserDAO {
 
 		} catch (SQLException ex) {
 			JOptionPane.showMessageDialog(null, "There was an error saving to database (UserDAO)" + ex);
-
+			throw new RuntimeException(ex);
 		} finally {
 			ConnectionFactory.closeConnection(con, stmt);
 		}
@@ -73,10 +73,10 @@ public class UserDAO {
 			}
 		} catch (SQLException ex) {
 			JOptionPane.showMessageDialog(null, "There was an error list all data from database (UserDAO)" + ex);
+			throw new RuntimeException(ex);
 		} finally {
 			ConnectionFactory.closeConnection(con, stmt, rs);
 		}
-
 		return users;
 	}
 
@@ -114,12 +114,12 @@ public class UserDAO {
 		} catch (SQLException ex) {
 			JOptionPane.showMessageDialog(null,
 					"There was an error to find the ID in the database (UserDAO.findID())" + ex);
+			throw new RuntimeException(ex);
 
 		} finally {
 			ConnectionFactory.closeConnection(con, stmt, rs);
 		}
 
-		return 0;
 	}
 
 	public User findUserByID(int id) throws SQLException {
@@ -156,11 +156,10 @@ public class UserDAO {
 		} catch (SQLException ex) {
 			JOptionPane.showMessageDialog(null,
 					"There was an error to find this user in the database (UserDAO.findUserByID())" + ex);
+			throw new RuntimeException(ex);
 
 		} finally {
 			ConnectionFactory.closeConnection(con, stmt, rs);
 		}
-
-		return null;
 	}
 }
