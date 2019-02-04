@@ -64,11 +64,5 @@ public class MainScreen {
 		
 		JMenuItem menuBalance = new JMenuItem("Balance");
 		mnList.add(menuBalance);
-		
-		JMenuItem menuListExpenses = new JMenuItem("Expenses");
-		mnList.add(menuListExpenses);
-		
-		JMenuItem menuListIncomes = new JMenuItem("Incomes");
-		mnList.add(menuListIncomes);
 	}
 }

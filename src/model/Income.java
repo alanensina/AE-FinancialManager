@@ -1,6 +1,13 @@
 package model;
 
-public class Income {
+import java.io.Serializable;
+
+public class Income implements Serializable{
+	
+	private static final long serialVersionUID = 1L;
+	
+	private int id;
+	private User user;
 	private String name;
 	private String description;
 	private double value;
@@ -13,6 +20,31 @@ public class Income {
 		this.description = description;
 		this.value = value;
 		this.date = date;
+	}	
+
+	public Income(int id, User user, String name, String description, double value, String date) {
+		this.id = id;
+		this.user = user;
+		this.name = name;
+		this.description = description;
+		this.value = value;
+		this.date = date;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 	public String getName() {

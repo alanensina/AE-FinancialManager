@@ -46,7 +46,7 @@ public class RegisterUserScreen extends JFrame {
 	public RegisterUserScreen() {
 		setTitle("Register User");
 		setResizable(true);
-		setBounds(100, 100, 400, 532);
+		setBounds(100, 100, 400, 559);
 		getContentPane().setLayout(null);
 		
 		// Setting the position to open centralized
