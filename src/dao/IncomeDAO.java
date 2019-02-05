@@ -20,6 +20,8 @@ public class IncomeDAO {
 
 	public void register(Income income, User user) {
 		String sql = "insert into income (user, name, description, value, date) values (?, ?, ?, ?, ?)";
+		UserDAO dao = new UserDAO();
+		user.setId(dao.findID(user.getUsername()));		
 
 		PreparedStatement stmt = null;
 
@@ -37,6 +39,22 @@ public class IncomeDAO {
 		} finally {
 			ConnectionFactory.closeConnection(con, stmt);
 		}
+	}
+	
+	public void deleteByID(int id) {
+		String sql = "delete from income where id = ?";
+		PreparedStatement stmt = null;
+		
+		try {
+			stmt = con.prepareStatement(sql);
+			stmt.setInt(1, id);
+			stmt.executeUpdate();
+		}catch (SQLException ex) {
+			JOptionPane.showMessageDialog(null, "There was an error deleting from the database (IncomeDAO.deleteByID())" + ex);
+			throw new RuntimeException(ex);
+		} finally {
+			ConnectionFactory.closeConnection(con, stmt);
+		}		
 	}
 	
 }

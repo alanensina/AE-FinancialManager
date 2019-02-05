@@ -38,4 +38,22 @@ public class ExpenseDAO {
 			ConnectionFactory.closeConnection(con, stmt);
 		}
 	}
+
+	public void deleteByID(int id) {
+		String sql = "delete from expense where id = ?";
+		PreparedStatement stmt = null;
+		
+		try {
+			stmt = con.prepareStatement(sql);
+			stmt.setInt(1, id);
+			stmt.executeUpdate();
+		}catch (SQLException ex) {
+			JOptionPane.showMessageDialog(null, "There was an error deleting from the database (ExpenseDAO.deleteByID())" + ex);
+			throw new RuntimeException(ex);
+		} finally {
+			ConnectionFactory.closeConnection(con, stmt);
+		}		
+	}
+
+
 }

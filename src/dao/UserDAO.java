@@ -162,4 +162,23 @@ public class UserDAO {
 			ConnectionFactory.closeConnection(con, stmt, rs);
 		}
 	}
+	
+	public void updateStatus(int id, boolean active) {
+		String sql = "update user set active = ? where id = ?";
+		PreparedStatement stmt = null;
+		
+		try {
+			stmt = con.prepareStatement(sql);
+			stmt.setBoolean(1, active);
+			stmt.setInt(2, id);
+			stmt.executeUpdate();			
+		}catch (SQLException ex) {
+			JOptionPane.showMessageDialog(null,
+					"There was an error to update the status of this user in the database (UserDAO.updateStatus())" + ex);
+			throw new RuntimeException(ex);
+
+		} finally {
+			ConnectionFactory.closeConnection(con, stmt);
+		}
+	}
 }

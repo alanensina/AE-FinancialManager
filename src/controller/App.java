@@ -6,7 +6,8 @@ public class App {
 
 	public static void main(String[] args) {
 
-		LoginScreen.main(args);
+		 LoginScreen.main(args);
+		
 	}
 
 }
