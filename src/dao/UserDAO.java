@@ -12,17 +12,29 @@ import javax.swing.JOptionPane;
 
 import connection.ConnectionFactory;
 import model.User;
+import repository.UserRepository;
 
-public class UserDAO {
+@SuppressWarnings("rawtypes")
+public class UserDAO implements UserRepository{
 	private Connection con = null;
 
 	public UserDAO() {
 		con = ConnectionFactory.getConnection();
 	}
 
-	public void create(User user) {
+	@Override
+	public boolean register(Object obj) {
 		String sql = "insert into user (first_name, last_name, phone, email, birthday, username, user_password, profession) values (?,?,?,?,?,?,?,?)";
-
+		User user;
+		
+		if(obj instanceof User) {
+			user = (User) obj;
+		} else {
+			JOptionPane.showMessageDialog(null,
+					"There was an error to update the status of this user in the database (UserDAO.register())");
+			return false;
+		}
+		
 		PreparedStatement stmt = null;
 
 		try {
@@ -43,9 +55,24 @@ public class UserDAO {
 		} finally {
 			ConnectionFactory.closeConnection(con, stmt);
 		}
+		return true;		
 	}
 
-	public List<User> read() {
+	@Override
+	public boolean delete(Object obj) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean update(Object obj) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public List<User> list() {
+		
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
 		String sql = "select * from user";
@@ -77,9 +104,31 @@ public class UserDAO {
 		} finally {
 			ConnectionFactory.closeConnection(con, stmt, rs);
 		}
-		return users;
+		return users;		
 	}
+	
+	@Override
+	public boolean updateStatus(int id, boolean active) {
+		String sql = "update user set active = ? where id = ?";
+		PreparedStatement stmt = null;
+		
+		try {
+			stmt = con.prepareStatement(sql);
+			stmt.setBoolean(1, active);
+			stmt.setInt(2, id);
+			stmt.executeUpdate();			
+		}catch (SQLException ex) {
+			JOptionPane.showMessageDialog(null,
+					"There was an error to update the status of this user in the database (UserDAO.updateStatus())" + ex);
+			throw new RuntimeException(ex);
 
+		} finally {
+			ConnectionFactory.closeConnection(con, stmt);
+		}
+		return true;
+	}
+	
+	@Override
 	public int findID(String username) {
 		User user = new User();
 		String sql = "select * from user where username = ?";
@@ -119,10 +168,10 @@ public class UserDAO {
 		} finally {
 			ConnectionFactory.closeConnection(con, stmt, rs);
 		}
-
 	}
 
-	public User findUserByID(int id) throws SQLException {
+	@Override
+	public User findUserByID(int id) {
 		User user = new User();
 		String sql = "select * from user where id = ?";
 		PreparedStatement stmt = null;
@@ -160,25 +209,6 @@ public class UserDAO {
 
 		} finally {
 			ConnectionFactory.closeConnection(con, stmt, rs);
-		}
-	}
-	
-	public void updateStatus(int id, boolean active) {
-		String sql = "update user set active = ? where id = ?";
-		PreparedStatement stmt = null;
-		
-		try {
-			stmt = con.prepareStatement(sql);
-			stmt.setBoolean(1, active);
-			stmt.setInt(2, id);
-			stmt.executeUpdate();			
-		}catch (SQLException ex) {
-			JOptionPane.showMessageDialog(null,
-					"There was an error to update the status of this user in the database (UserDAO.updateStatus())" + ex);
-			throw new RuntimeException(ex);
-
-		} finally {
-			ConnectionFactory.closeConnection(con, stmt);
 		}
 	}
 }

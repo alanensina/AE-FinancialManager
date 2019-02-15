@@ -10,18 +10,20 @@ import javax.swing.JOptionPane;
 import connection.ConnectionFactory;
 import model.Income;
 import model.User;
+import repository.IncomeRepository;
 
-public class IncomeDAO {
+public class IncomeDAO implements IncomeRepository {
 	private Connection con = null;
 
 	public IncomeDAO() {
 		con = ConnectionFactory.getConnection();
 	}
 
-	public void register(Income income, User user) {
+	@Override
+	public boolean register(Income income, User user) {
 		String sql = "insert into income (user, name, description, value, date) values (?, ?, ?, ?, ?)";
 		UserDAO dao = new UserDAO();
-		user.setId(dao.findID(user.getUsername()));		
+		user.setId(dao.findID(user.getUsername()));
 
 		PreparedStatement stmt = null;
 
@@ -39,22 +41,25 @@ public class IncomeDAO {
 		} finally {
 			ConnectionFactory.closeConnection(con, stmt);
 		}
+		return true;
 	}
-	
-	public void deleteByID(int id) {
+
+	@Override
+	public boolean deleteByID(int id) {
 		String sql = "delete from income where id = ?";
 		PreparedStatement stmt = null;
-		
+
 		try {
 			stmt = con.prepareStatement(sql);
 			stmt.setInt(1, id);
 			stmt.executeUpdate();
-		}catch (SQLException ex) {
-			JOptionPane.showMessageDialog(null, "There was an error deleting from the database (IncomeDAO.deleteByID())" + ex);
+		} catch (SQLException ex) {
+			JOptionPane.showMessageDialog(null,
+					"There was an error deleting from the database (IncomeDAO.deleteByID())" + ex);
 			throw new RuntimeException(ex);
 		} finally {
 			ConnectionFactory.closeConnection(con, stmt);
-		}		
+		}
+		return true;
 	}
-	
 }

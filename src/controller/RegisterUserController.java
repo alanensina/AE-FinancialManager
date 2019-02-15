@@ -8,7 +8,9 @@ public class RegisterUserController {
 	}
 
 	public void register() {
-
+		// receber a view com os dados
+		// validar os dados
+		// persistir os dados no banco
 	}
 
 	public boolean validateName(String name) {

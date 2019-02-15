@@ -10,15 +10,17 @@ import javax.swing.JOptionPane;
 import connection.ConnectionFactory;
 import model.Expense;
 import model.User;
+import repository.ExpenseRepository;
 
-public class ExpenseDAO {
+public class ExpenseDAO implements ExpenseRepository {
 	private Connection con = null;
 
 	public ExpenseDAO() {
 		con = ConnectionFactory.getConnection();
 	}
 
-	public void register(Expense expense, User user) {
+	@Override
+	public boolean register(Expense expense, User user) {
 		String sql = "insert into expense (user, name, description, value, date) values (?, ?, ?, ?, ?)";
 
 		PreparedStatement stmt = null;
@@ -37,23 +39,25 @@ public class ExpenseDAO {
 		} finally {
 			ConnectionFactory.closeConnection(con, stmt);
 		}
+		return true;
 	}
 
-	public void deleteByID(int id) {
+	@Override
+	public boolean deleteByID(int id) {
 		String sql = "delete from expense where id = ?";
 		PreparedStatement stmt = null;
-		
+
 		try {
 			stmt = con.prepareStatement(sql);
 			stmt.setInt(1, id);
 			stmt.executeUpdate();
-		}catch (SQLException ex) {
-			JOptionPane.showMessageDialog(null, "There was an error deleting from the database (ExpenseDAO.deleteByID())" + ex);
+		} catch (SQLException ex) {
+			JOptionPane.showMessageDialog(null,
+					"There was an error deleting from the database (ExpenseDAO.deleteByID())" + ex);
 			throw new RuntimeException(ex);
 		} finally {
 			ConnectionFactory.closeConnection(con, stmt);
-		}		
+		}
+		return true;
 	}
-
-
 }
