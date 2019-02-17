@@ -163,6 +163,14 @@ public class RegisterUserScreen extends JFrame {
 		txtPassword.setColumns(10);
 
 		JButton btRegister = new JButton("Register");
+		btRegister.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				
+				
+				
+			}
+		});
 		btRegister.setBounds(235, 487, 117, 25);
 		getContentPane().add(btRegister);
 

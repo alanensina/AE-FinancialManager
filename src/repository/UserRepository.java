@@ -14,9 +14,9 @@ public interface UserRepository<G> {
 
 	public List<G> list();
 
-	public boolean updateStatus(int id, boolean active);
+	public boolean updateStatus(G obj, boolean active);
 
-	public int findID(String username);
+	public int findID(G obj);
 
 	public User findUserByID(int id);
 

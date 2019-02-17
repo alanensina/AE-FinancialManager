@@ -15,7 +15,8 @@ import model.User;
 import repository.UserRepository;
 
 @SuppressWarnings("rawtypes")
-public class UserDAO implements UserRepository{
+public class UserDAO implements UserRepository {
+
 	private Connection con = null;
 
 	public UserDAO() {
@@ -25,16 +26,15 @@ public class UserDAO implements UserRepository{
 	@Override
 	public boolean register(Object obj) {
 		String sql = "insert into user (first_name, last_name, phone, email, birthday, username, user_password, profession) values (?,?,?,?,?,?,?,?)";
-		User user;
-		
-		if(obj instanceof User) {
+		User user = new User();
+
+		if (obj instanceof User) {
 			user = (User) obj;
 		} else {
-			JOptionPane.showMessageDialog(null,
-					"There was an error to update the status of this user in the database (UserDAO.register())");
+			JOptionPane.showMessageDialog(null, "Object is not an instance of User. Method: UserDAO.register()");
 			return false;
 		}
-		
+
 		PreparedStatement stmt = null;
 
 		try {
@@ -55,24 +55,62 @@ public class UserDAO implements UserRepository{
 		} finally {
 			ConnectionFactory.closeConnection(con, stmt);
 		}
-		return true;		
+		return true;
 	}
 
 	@Override
 	public boolean delete(Object obj) {
-		// TODO Auto-generated method stub
+		/*
+		 * Lembrete: Ao deletar o usuário, deve-se deletar seus registros na tabela
+		 * Income e Expense
+		 */
+
 		return false;
 	}
 
+	
+	// Falta testar esse método
 	@Override
 	public boolean update(Object obj) {
-		// TODO Auto-generated method stub
-		return false;
+		String sql = "update user set first_name = ?," + " last_name = ?, phone = ?, email = ?, "
+				+ "birthday = ?, username = ?, user_password = ?, " + "profession = ?, active = ? where id = ?";
+		User user = new User();
+
+		if (obj instanceof User) {
+			user = (User) obj;
+		} else {
+			JOptionPane.showMessageDialog(null, "Object is not an instance of User. Method: UserDAO.update()");
+			return false;
+		}
+
+		PreparedStatement stmt = null;
+
+		try {
+			stmt = con.prepareStatement(sql);
+			stmt.setString(1, user.getFirstName());
+			stmt.setString(2, user.getLastName());
+			stmt.setString(3, user.getPhone());
+			stmt.setString(4, user.getEmail());
+			stmt.setString(5, user.getBirthday());
+			stmt.setString(6, user.getUsername());
+			stmt.setString(7, user.getPassword());
+			stmt.setString(8, user.getProfession());
+			stmt.setBoolean(9, user.isActive());
+			stmt.setInt(10, user.getId());
+			stmt.executeUpdate();
+
+		} catch (SQLException ex) {
+			JOptionPane.showMessageDialog(null, "There was an error updating to database (UserDAO.update())" + ex);
+			throw new RuntimeException(ex);
+		} finally {
+			ConnectionFactory.closeConnection(con, stmt);
+		}
+		return true;
 	}
 
 	@Override
 	public List<User> list() {
-		
+
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
 		String sql = "select * from user";
@@ -104,22 +142,31 @@ public class UserDAO implements UserRepository{
 		} finally {
 			ConnectionFactory.closeConnection(con, stmt, rs);
 		}
-		return users;		
+		return users;
 	}
-	
+
 	@Override
-	public boolean updateStatus(int id, boolean active) {
+	public boolean updateStatus(Object obj, boolean active) {
 		String sql = "update user set active = ? where id = ?";
 		PreparedStatement stmt = null;
-		
+		User user = new User();
+
+		if (obj instanceof User) {
+			user = (User) obj;
+		} else {
+			JOptionPane.showMessageDialog(null, "Object is not an instance of User. Method: UserDAO.updateStatus()");
+			return false;
+		}
+
 		try {
 			stmt = con.prepareStatement(sql);
 			stmt.setBoolean(1, active);
-			stmt.setInt(2, id);
-			stmt.executeUpdate();			
-		}catch (SQLException ex) {
+			stmt.setInt(2, user.getId());
+			stmt.executeUpdate();
+		} catch (SQLException ex) {
 			JOptionPane.showMessageDialog(null,
-					"There was an error to update the status of this user in the database (UserDAO.updateStatus())" + ex);
+					"There was an error to update the status of this user in the database (UserDAO.updateStatus())"
+							+ ex);
 			throw new RuntimeException(ex);
 
 		} finally {
@@ -127,17 +174,23 @@ public class UserDAO implements UserRepository{
 		}
 		return true;
 	}
-	
+
 	@Override
-	public int findID(String username) {
+	public int findID(Object obj) {
 		User user = new User();
 		String sql = "select * from user where username = ?";
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
 
+		if (obj instanceof User) {
+			user = (User) obj;
+		} else {
+			JOptionPane.showMessageDialog(null, "Object is not an instance of User. Method: UserDAO.findID()");
+		}
+
 		try {
 			stmt = con.prepareStatement(sql);
-			stmt.setString(1, username);
+			stmt.setString(1, user.getUsername());
 			rs = stmt.executeQuery();
 
 			while (rs.next()) {

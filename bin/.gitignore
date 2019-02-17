@@ -1,3 +1,6 @@
 /dao/
 /repository/
 /controller/
+/view/
+/RegisterUserService.class
+/service/

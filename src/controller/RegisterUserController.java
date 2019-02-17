@@ -8,9 +8,15 @@ public class RegisterUserController {
 	}
 
 	public void register() {
-		// receber a view com os dados
-		// validar os dados
-		// persistir os dados no banco
+		/*
+		- Criar uma camada service que faz toda a manipulação dos dados
+		- Os controllers serão responsáveis apenas para fazer a comunicação entre as camadas
+		- A view pode ter implementação dentro dos ActionListeners, porém apenas para pegar os dados da tela, 
+			passar para o controller e ele enviar pro service manipular esses dados.
+		
+		Caminho dos dados:
+		View -> Controller -> Service -> Controller -> DAO
+		*/
 	}
 
 	public boolean validateName(String name) {
