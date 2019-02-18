@@ -25,7 +25,7 @@ public class UserDAO implements UserRepository {
 
 	@Override
 	public boolean register(Object obj) {
-		String sql = "insert into user (first_name, last_name, phone, email, birthday, username, user_password, profession) values (?,?,?,?,?,?,?,?)";
+		String sql = "insert into user (name, surname, phone, email, birthday, username, user_password, profession) values (?,?,?,?,?,?,?,?)";
 		User user = new User();
 
 		if (obj instanceof User) {
@@ -39,8 +39,8 @@ public class UserDAO implements UserRepository {
 
 		try {
 			stmt = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-			stmt.setString(1, user.getFirstName());
-			stmt.setString(2, user.getLastName());
+			stmt.setString(1, user.getName());
+			stmt.setString(2, user.getSurname());
 			stmt.setString(3, user.getPhone());
 			stmt.setString(4, user.getEmail());
 			stmt.setString(5, user.getBirthday());
@@ -72,7 +72,7 @@ public class UserDAO implements UserRepository {
 	// Falta testar esse método
 	@Override
 	public boolean update(Object obj) {
-		String sql = "update user set first_name = ?," + " last_name = ?, phone = ?, email = ?, "
+		String sql = "update user set name = ?," + " surname = ?, phone = ?, email = ?, "
 				+ "birthday = ?, username = ?, user_password = ?, " + "profession = ?, active = ? where id = ?";
 		User user = new User();
 
@@ -87,8 +87,8 @@ public class UserDAO implements UserRepository {
 
 		try {
 			stmt = con.prepareStatement(sql);
-			stmt.setString(1, user.getFirstName());
-			stmt.setString(2, user.getLastName());
+			stmt.setString(1, user.getName());
+			stmt.setString(2, user.getSurname());
 			stmt.setString(3, user.getPhone());
 			stmt.setString(4, user.getEmail());
 			stmt.setString(5, user.getBirthday());
@@ -125,8 +125,8 @@ public class UserDAO implements UserRepository {
 
 				User user = new User();
 				user.setId(rs.getInt(1));
-				user.setFirstName(rs.getString("first_name"));
-				user.setLastName(rs.getString("last_name"));
+				user.setName(rs.getString("name"));
+				user.setSurname(rs.getString("surname"));
 				user.setPhone(rs.getString("phone"));
 				user.setEmail(rs.getString("email"));
 				user.setBirthday(rs.getString("birthday"));
@@ -195,8 +195,8 @@ public class UserDAO implements UserRepository {
 
 			while (rs.next()) {
 				user.setId(rs.getInt(1));
-				user.setFirstName(rs.getString("first_name"));
-				user.setLastName(rs.getString("last_name"));
+				user.setName(rs.getString("name"));
+				user.setSurname(rs.getString("surname"));
 				user.setPhone(rs.getString("phone"));
 				user.setEmail(rs.getString("email"));
 				user.setBirthday(rs.getString("birthday"));
@@ -237,8 +237,8 @@ public class UserDAO implements UserRepository {
 
 			while (rs.next()) {
 				user.setId(id);
-				user.setFirstName(rs.getString("first_name"));
-				user.setLastName(rs.getString("last_name"));
+				user.setName(rs.getString("name"));
+				user.setSurname(rs.getString("surname"));
 				user.setPhone(rs.getString("phone"));
 				user.setEmail(rs.getString("email"));
 				user.setBirthday(rs.getString("birthday"));

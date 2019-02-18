@@ -8,8 +8,8 @@ public class User implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	private int id;
-	private String firstName;
-	private String lastName;
+	private String name;
+	private String surname;
 	private String phone;
 	private String email;
 	private String birthday;
@@ -22,10 +22,10 @@ public class User implements Serializable{
 	
 	public User() {}	
 
-	public User(String firstName, String lastName, String phone, String email, String birthday, String username,
+	public User(String name, String surname, String phone, String email, String birthday, String username,
 			String password, String profession, boolean active, List<Income> incomes, List<Expense> expenses) {
-		this.firstName = firstName;
-		this.lastName = lastName;
+		this.name = name;
+		this.surname = surname;
 		this.phone = phone;
 		this.email = email;
 		this.birthday = birthday;
@@ -37,11 +37,11 @@ public class User implements Serializable{
 		this.expenses = expenses;
 	}
 	
-	public User(int id, String firstName, String lastName, String phone, String email, String birthday, String username,
+	public User(int id, String name, String surname, String phone, String email, String birthday, String username,
 			String password, String profession, boolean active, List<Income> incomes, List<Expense> expenses) {
 		this.id = id;
-		this.firstName = firstName;
-		this.lastName = lastName;
+		this.name = name;
+		this.surname = surname;
 		this.phone = phone;
 		this.email = email;
 		this.birthday = birthday;
@@ -61,20 +61,20 @@ public class User implements Serializable{
 		this.id = id;
 	}
 
-	public String getFirstName() {
-		return firstName;
+	public String getName() {
+		return name;
 	}
 
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
+	public void setName(String name) {
+		this.name = name;
 	}
 
-	public String getLastName() {
-		return lastName;
+	public String getSurname() {
+		return surname;
 	}
 
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
+	public void setSurname(String surname) {
+		this.surname = surname;
 	}
 
 	public String getPhone() {
@@ -151,6 +151,6 @@ public class User implements Serializable{
 
 	@Override
 	public String toString() {
-		return this.firstName + " " + this.lastName;
+		return this.name + " " + this.surname;
 	}	
 }

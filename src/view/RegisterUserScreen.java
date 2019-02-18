@@ -4,6 +4,8 @@ import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -16,12 +18,13 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.TitledBorder;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
+
+import controller.RegisterUserController;
+import model.User;
 
 public class RegisterUserScreen extends JFrame {
-	private JTextField txtFirstName;
-	private JTextField txtLastName;
+	private JTextField txtName;
+	private JTextField txtSurname;
 	private JTextField txtBirthday;
 	private JTextField txtEmail;
 	private JTextField txtPhone;
@@ -68,26 +71,26 @@ public class RegisterUserScreen extends JFrame {
 		getContentPane().add(panelPersonalDetails);
 		panelPersonalDetails.setLayout(null);
 
-		JLabel lbFirstName = new JLabel("First name");
-		lbFirstName.setFont(new Font("Dialog", Font.PLAIN, 12));
-		lbFirstName.setBounds(12, 26, 70, 15);
-		lbFirstName.setHorizontalAlignment(SwingConstants.LEFT);
-		panelPersonalDetails.add(lbFirstName);
+		JLabel lbName = new JLabel("Name");
+		lbName.setFont(new Font("Dialog", Font.PLAIN, 12));
+		lbName.setBounds(12, 26, 70, 15);
+		lbName.setHorizontalAlignment(SwingConstants.LEFT);
+		panelPersonalDetails.add(lbName);
 
-		txtFirstName = new JTextField();
-		txtFirstName.setBounds(92, 24, 262, 19);
-		panelPersonalDetails.add(txtFirstName);
-		txtFirstName.setColumns(10);
+		txtName = new JTextField();
+		txtName.setBounds(92, 24, 262, 19);
+		panelPersonalDetails.add(txtName);
+		txtName.setColumns(10);
 
-		JLabel lbLastName = new JLabel("Last name");
-		lbLastName.setFont(new Font("Dialog", Font.PLAIN, 12));
-		lbLastName.setBounds(12, 53, 70, 15);
-		panelPersonalDetails.add(lbLastName);
+		JLabel lbSurname = new JLabel("Surname");
+		lbSurname.setFont(new Font("Dialog", Font.PLAIN, 12));
+		lbSurname.setBounds(12, 53, 70, 15);
+		panelPersonalDetails.add(lbSurname);
 
-		txtLastName = new JTextField();
-		txtLastName.setBounds(92, 51, 262, 19);
-		panelPersonalDetails.add(txtLastName);
-		txtLastName.setColumns(10);
+		txtSurname = new JTextField();
+		txtSurname.setBounds(92, 51, 262, 19);
+		panelPersonalDetails.add(txtSurname);
+		txtSurname.setColumns(10);
 
 		JLabel lbBirthday = new JLabel("Birthday");
 		lbBirthday.setFont(new Font("Dialog", Font.PLAIN, 12));
@@ -165,10 +168,18 @@ public class RegisterUserScreen extends JFrame {
 		JButton btRegister = new JButton("Register");
 		btRegister.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+
+				User user = new User();
+				user.setName(txtName.getText());
+				user.setSurname(txtSurname.getText());
+				user.setBirthday(txtBirthday.getText());
+				user.setEmail(txtEmail.getText());
+				user.setProfession(txtProfession.getText());
+				user.setUsername(txtUsername.getText());
+				user.setPassword(txtPassword.getText());
 				
-				
-				
-				
+				RegisterUserController userController = new RegisterUserController();
+				userController.receiveUser(user);
 			}
 		});
 		btRegister.setBounds(235, 487, 117, 25);
@@ -189,12 +200,12 @@ public class RegisterUserScreen extends JFrame {
 	public LinkedList<String> getScreenData(RegisterUserScreen frame) {
 		screenData = null;
 
-		if (txtFirstName.getText() != null && txtLastName.getText() != null && txtBirthday.getText() != null
+		if (txtName.getText() != null && txtSurname.getText() != null && txtBirthday.getText() != null
 				&& txtEmail.getText() != null && txtPhone.getText() != null && txtProfession.getText() != null
 				&& txtUsername.getText() != null && txtPassword.getText() != null) {
 
-			screenData.add(txtFirstName.getText());
-			screenData.add(txtLastName.getText());
+			screenData.add(txtName.getText());
+			screenData.add(txtSurname.getText());
 			screenData.add(txtBirthday.getText());
 			screenData.add(txtEmail.getText());
 			screenData.add(txtPhone.getText());
