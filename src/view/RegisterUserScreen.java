@@ -177,9 +177,12 @@ public class RegisterUserScreen extends JFrame {
 				user.setProfession(txtProfession.getText());
 				user.setUsername(txtUsername.getText());
 				user.setPassword(txtPassword.getText());
+				user.setPhone(txtPhone.getText());
 				
 				RegisterUserController userController = new RegisterUserController();
 				userController.receiveUser(user);
+				dispose();
+				new LoginScreen().setVisible(true);
 			}
 		});
 		btRegister.setBounds(235, 487, 117, 25);

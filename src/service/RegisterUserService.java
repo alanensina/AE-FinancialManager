@@ -10,19 +10,16 @@ public class RegisterUserService {
 	}
 
 	public User validateUser(User user) {
-		if(validateFirstName(user.getName()) &&
-		validateLastName(user.getSurname()) &&
-		validateEmail(user.getEmail()) &&
-		validateData(user.getBirthday()) &&
-		validateProfession(user.getProfession()) &&
-		validateUsername(user.getUsername()) &&
-		validatePassword(user.getPassword()) &&
-		validatePhone(user.getPhone())) {
+		if (validateFirstName(user.getName()) && validateLastName(user.getSurname()) && validateEmail(user.getEmail())
+				&& validateData(user.getBirthday()) && validateProfession(user.getProfession())
+				&& validateUsername(user.getUsername()) && validatePassword(user.getPassword())
+				&& validatePhone(user.getPhone())) {
 			return user;
 		} else {
-			JOptionPane.showMessageDialog(null, "There was an error saving to database (RegisterUserService.validateUser)");
-			throw new RuntimeException(); 
-		}		
+			JOptionPane.showMessageDialog(null,
+					"There was an error saving to database (RegisterUserService.validateUser)");
+			throw new RuntimeException();
+		}
 	}
 
 	/*
@@ -122,5 +119,4 @@ public class RegisterUserService {
 			return false;
 		}
 	}
-
 }
