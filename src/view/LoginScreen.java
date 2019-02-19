@@ -17,6 +17,9 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
+import controller.LoginController;
+import model.User;
+
 public class LoginScreen extends JFrame {
 
 	private JPanel contentPane;
@@ -74,6 +77,17 @@ public class LoginScreen extends JFrame {
 		contentPane.add(txtPassword);
 
 		JButton btSingIn = new JButton("Sing in");
+		btSingIn.addActionListener(new ActionListener() {
+			@SuppressWarnings("deprecation")
+			public void actionPerformed(ActionEvent e) {
+				User user = new User();
+				user.setUsername(txtUsername.getText());
+				user.setPassword(txtPassword.getText());
+				
+				LoginController controller = new LoginController();
+				controller.receiveUser(user);				
+			}
+		});
 		btSingIn.setBounds(12, 221, 108, 25);
 		contentPane.add(btSingIn);
 

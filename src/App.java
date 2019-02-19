@@ -1,10 +1,9 @@
-package controller;
-
 import view.LoginScreen;
+import static controller.AppController.*;
 
 public class App {
 
 	public static void main(String[] args) {
-		 LoginScreen.main(args);
+		initialize(args);
 	}
 }

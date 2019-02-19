@@ -19,5 +19,7 @@ public interface UserRepository<G> {
 	public int findID(G obj);
 
 	public User findUserByID(int id);
-
+	
+	public User findUser(G obj);
+	
 }

@@ -68,7 +68,6 @@ public class UserDAO implements UserRepository {
 		return false;
 	}
 
-	
 	// Falta testar esse método
 	@Override
 	public boolean update(Object obj) {
@@ -263,5 +262,54 @@ public class UserDAO implements UserRepository {
 		} finally {
 			ConnectionFactory.closeConnection(con, stmt, rs);
 		}
+	}
+
+	@Override
+	public User findUser(Object obj) {
+		User user = new User();
+		if (obj instanceof User) {
+			user = (User) obj;
+		} else {
+			JOptionPane.showMessageDialog(null,
+					"The input parameter is not an instance of User (UserDAO.findUser())");
+			throw new RuntimeException();
+		}
+
+		String sql = "select * from user where username = ?";
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+
+		try {
+			stmt = con.prepareStatement(sql);
+			stmt.setString(1, user.getUsername());
+			rs = stmt.executeQuery();
+
+			while (rs.next()) {
+				user.setId(rs.getInt("id"));
+				user.setName(rs.getString("name"));
+				user.setSurname(rs.getString("surname"));
+				user.setPhone(rs.getString("phone"));
+				user.setEmail(rs.getString("email"));
+				user.setBirthday(rs.getString("birthday"));
+				user.setUsername(rs.getString("username"));
+				user.setPassword(rs.getString("user_password"));
+				user.setProfession(rs.getString("profession"));
+
+				int active = Integer.parseInt(rs.getString("active"));
+
+				if (active == 1) {
+					user.setActive(true);
+				} else {
+					user.setActive(false);
+				}
+			}
+		} catch (SQLException ex) {
+			JOptionPane.showMessageDialog(null,
+					"There was an error to find this user in the database (UserDAO.findUser())" + ex);
+			throw new RuntimeException(ex);
+		} finally {
+			ConnectionFactory.closeConnection(con, stmt, rs);
+		}
+		return user;
 	}
 }
