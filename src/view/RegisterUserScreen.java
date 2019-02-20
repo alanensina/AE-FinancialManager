@@ -32,6 +32,8 @@ public class RegisterUserScreen extends JFrame {
 	private JTextField txtUsername;
 	private JTextField txtPassword;
 	private List<String> screenData;
+	private RegisterUserController userController = new RegisterUserController();
+	private LoginScreen loginScreen = new LoginScreen();
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -51,12 +53,12 @@ public class RegisterUserScreen extends JFrame {
 		setResizable(true);
 		setBounds(100, 100, 400, 559);
 		getContentPane().setLayout(null);
-		
+
 		// Setting the position to open centralized
-				Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-		        int x = (int) (screenSize.getWidth() - 400) / 2;
-		        int y = (int) (screenSize.getHeight() - 532) / 2;
-		        setLocation(x, y);
+		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+		int x = (int) (screenSize.getWidth() - 400) / 2;
+		int y = (int) (screenSize.getHeight() - 532) / 2;
+		setLocation(x, y);
 
 		JLabel lblLogo = new JLabel("");
 		lblLogo.setHorizontalAlignment(SwingConstants.CENTER);
@@ -178,11 +180,10 @@ public class RegisterUserScreen extends JFrame {
 				user.setUsername(txtUsername.getText());
 				user.setPassword(txtPassword.getText());
 				user.setPhone(txtPhone.getText());
-				
-				RegisterUserController userController = new RegisterUserController();
+
 				userController.receiveUser(user);
 				dispose();
-				new LoginScreen().setVisible(true);
+				loginScreen.setVisible(true);
 			}
 		});
 		btRegister.setBounds(235, 487, 117, 25);
@@ -192,35 +193,11 @@ public class RegisterUserScreen extends JFrame {
 		btCancel.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				dispose();
-				new LoginScreen().setVisible(true);
-				}
+				loginScreen.setVisible(true);
+			}
 		});
 		btCancel.setBounds(34, 487, 117, 25);
 		getContentPane().add(btCancel);
 
 	}
-
-	public LinkedList<String> getScreenData(RegisterUserScreen frame) {
-		screenData = null;
-
-		if (txtName.getText() != null && txtSurname.getText() != null && txtBirthday.getText() != null
-				&& txtEmail.getText() != null && txtPhone.getText() != null && txtProfession.getText() != null
-				&& txtUsername.getText() != null && txtPassword.getText() != null) {
-
-			screenData.add(txtName.getText());
-			screenData.add(txtSurname.getText());
-			screenData.add(txtBirthday.getText());
-			screenData.add(txtEmail.getText());
-			screenData.add(txtPhone.getText());
-			screenData.add(txtProfession.getText());
-			screenData.add(txtUsername.getText());
-			screenData.add(txtPassword.getText());
-
-			return (LinkedList<String>) screenData;
-		}
-
-		JOptionPane.showMessageDialog(null, "You forgot to fill in one or more fields.");
-		return null;
-	}
-
 }

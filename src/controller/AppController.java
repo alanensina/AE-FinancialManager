@@ -10,11 +10,4 @@ public class AppController {
 	public static void initialize(String[] args) {
 		LoginScreen.main(args);
 	}
-	
-	
-	public User receiveUser(User user) {
-		
-		
-		return null;
-	}
 }

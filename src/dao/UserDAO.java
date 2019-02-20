@@ -13,10 +13,12 @@ import javax.swing.JOptionPane;
 import connection.ConnectionFactory;
 import model.User;
 import repository.UserRepository;
+import service.DaoService;
 
 @SuppressWarnings("rawtypes")
 public class UserDAO implements UserRepository {
-
+	
+	private DaoService service = new DaoService();
 	private Connection con = null;
 
 	public UserDAO() {
@@ -50,11 +52,15 @@ public class UserDAO implements UserRepository {
 			stmt.executeUpdate();
 
 		} catch (SQLException ex) {
-			JOptionPane.showMessageDialog(null, "There was an error saving to database (UserDAO)" + ex);
-			throw new RuntimeException(ex);
+			service.emptyFields(user);
+			return false;
+		} catch (Throwable e) {
+			JOptionPane.showMessageDialog(null, "There was an error saving to database(UserDAO)" + e);
+			return false;
 		} finally {
 			ConnectionFactory.closeConnection(con, stmt);
 		}
+		JOptionPane.showMessageDialog(null, "User registered successfully.");
 		return true;
 	}
 
@@ -99,11 +105,12 @@ public class UserDAO implements UserRepository {
 			stmt.executeUpdate();
 
 		} catch (SQLException ex) {
-			JOptionPane.showMessageDialog(null, "There was an error updating to database (UserDAO.update())" + ex);
-			throw new RuntimeException(ex);
+			service.emptyFields(user);
+			return false;
 		} finally {
 			ConnectionFactory.closeConnection(con, stmt);
 		}
+		JOptionPane.showMessageDialog(null, "User updated successfully!");
 		return true;
 	}
 
@@ -265,13 +272,12 @@ public class UserDAO implements UserRepository {
 	}
 
 	@Override
-	public User findUser(Object obj) {
+	public User retrieveUser(Object obj) {
 		User user = new User();
 		if (obj instanceof User) {
 			user = (User) obj;
 		} else {
-			JOptionPane.showMessageDialog(null,
-					"The input parameter is not an instance of User (UserDAO.findUser())");
+			JOptionPane.showMessageDialog(null, "The input parameter is not an instance of User (UserDAO.findUser())");
 			throw new RuntimeException();
 		}
 
