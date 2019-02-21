@@ -1,23 +1,20 @@
 package controller;
 
-import javax.swing.JOptionPane;
-
 import model.User;
 import service.LoginService;
 
 public class LoginController {
+	LoginService service = new LoginService();
 
-	public LoginController() {}
+	public LoginController() {
+	}
 
 	public void receiveUser(User user) {
 		sendToService(user);
 	}
-	
-	public static User sendToService(User user) {
-		User userReturned = new User();
-		LoginService service = new LoginService();
-		userReturned = service.checkLogin(user);
-		return userReturned;
+
+	public void sendToService(User user) {
+		service.checkLogin(user);
 	}
-	
+
 }

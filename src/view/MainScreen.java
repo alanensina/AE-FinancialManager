@@ -1,18 +1,18 @@
 package view;
 
+import java.awt.Color;
 import java.awt.EventQueue;
 
-import javax.swing.JFrame;
 import javax.swing.JDesktopPane;
-import java.awt.BorderLayout;
+import javax.swing.JFrame;
+import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
-import javax.swing.JMenu;
-import java.awt.SystemColor;
-import javax.swing.UIManager;
-import java.awt.Color;
+
+import model.User;
 
 public class MainScreen {
+	private User user; // Check here
 
 	private JFrame frmAeFinancialManager;
 
@@ -30,6 +30,12 @@ public class MainScreen {
 	}
 
 	public MainScreen() {
+		initialize();
+	}
+	
+	// Check here
+	public MainScreen(User user) {
+		this.user = user;
 		initialize();
 	}
 

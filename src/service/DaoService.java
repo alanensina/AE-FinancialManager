@@ -36,4 +36,12 @@ public class DaoService {
 			JOptionPane.showMessageDialog(null, "Profession is empty");
 		}
 	}
+	
+	public static void wrongLogin() {
+		JOptionPane.showMessageDialog(null, "Username or password doesn't match.");
+	}
+	
+	public static void sucess() {
+		JOptionPane.showMessageDialog(null, "Welcome!");
+	}
 }
