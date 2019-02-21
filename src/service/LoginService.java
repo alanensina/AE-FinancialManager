@@ -28,8 +28,4 @@ public class LoginService {
 		wrongLogin();
 	}
 
-	public static boolean checkPassword(User userLogin, User userDB) {
-		return userLogin.getPassword().equals(userDB.getPassword());
-	}
-
 }
