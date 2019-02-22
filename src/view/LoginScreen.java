@@ -45,13 +45,13 @@ public class LoginScreen extends JFrame {
 		setTitle("AE Financial Manager");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 363, 308);
-		
+
 		// Setting the position to open centralized
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-        int x = (int) (screenSize.getWidth() - 363) / 2;
-        int y = (int) (screenSize.getHeight() - 308) / 2;
-        setLocation(x, y);
-        
+		int x = (int) (screenSize.getWidth() - 363) / 2;
+		int y = (int) (screenSize.getHeight() - 308) / 2;
+		setLocation(x, y);
+
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -83,9 +83,11 @@ public class LoginScreen extends JFrame {
 				User user = new User();
 				user.setUsername(txtUsername.getText());
 				user.setPassword(txtPassword.getText());
-				
+
 				LoginController controller = new LoginController();
-				controller.receiveUser(user);				
+				if (controller.receiveUser(user)) {
+					dispose();
+				}
 			}
 		});
 		btSingIn.setBounds(12, 221, 108, 25);

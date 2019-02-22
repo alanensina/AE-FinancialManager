@@ -8,11 +8,14 @@ import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 
 import model.User;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class MainScreen {
-	private User user; // Check here
+	private User user = new User(); // Check here
 
 	private JFrame frmAeFinancialManager;
 
@@ -36,7 +39,16 @@ public class MainScreen {
 	// Check here
 	public MainScreen(User user) {
 		this.user = user;
+		System.out.println(user); // Isso ta printando
 		initialize();
+	}	
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 	private void initialize() {
@@ -69,6 +81,11 @@ public class MainScreen {
 		menuBar.add(mnList);
 		
 		JMenuItem menuBalance = new JMenuItem("Balance");
+		menuBalance.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JOptionPane.showMessageDialog(null, getUser());    // Isso da null pointer
+			}
+		});
 		mnList.add(menuBalance);
 	}
 }

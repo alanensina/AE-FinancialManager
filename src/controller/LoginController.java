@@ -9,12 +9,12 @@ public class LoginController {
 	public LoginController() {
 	}
 
-	public void receiveUser(User user) {
-		sendToService(user);
+	public boolean receiveUser(User user) {
+		return sendToService(user);
 	}
 
-	public void sendToService(User user) {
-		service.checkLogin(user);
+	public boolean sendToService(User user) {
+		return service.checkLogin(user);
 	}
 
 }
