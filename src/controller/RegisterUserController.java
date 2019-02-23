@@ -1,8 +1,5 @@
 package controller;
 
-import javax.swing.JOptionPane;
-
-import dao.UserDAO;
 import model.User;
 import service.RegisterUserService;
 

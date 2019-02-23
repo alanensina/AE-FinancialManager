@@ -9,11 +9,14 @@ import javax.swing.DefaultComboBoxModel;
 import java.awt.Font;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.border.TitledBorder;
 import javax.swing.border.LineBorder;
 import java.awt.Color;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class BalanceScreen extends JInternalFrame {
 	private JTable tbExpenses;
@@ -156,10 +159,20 @@ public class BalanceScreen extends JInternalFrame {
 		getContentPane().add(btRefresh);
 		
 		JButton btSave = new JButton("Save");
+		btSave.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JOptionPane.showMessageDialog(null,"Saving to PDF, please wait...");
+			}
+		});
 		btSave.setBounds(305, 481, 117, 25);
 		getContentPane().add(btSave);
 		
 		JButton btCancel = new JButton("Cancel");
+		btCancel.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+			}
+		});
 		btCancel.setBounds(176, 481, 117, 25);
 		getContentPane().add(btCancel);
 

@@ -85,8 +85,13 @@ public class LoginScreen extends JFrame {
 				user.setPassword(txtPassword.getText());
 
 				LoginController controller = new LoginController();
-				if (controller.receiveUser(user)) {
+				if (controller.sendToService(user)) {
 					dispose();
+					//User user2 = controller.getUserLogged(user);
+					
+				//MainScreen mainScreen = new MainScreen(user2);
+				MainScreen mainScreen = new MainScreen();
+					
 				}
 			}
 		});

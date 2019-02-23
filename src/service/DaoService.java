@@ -44,4 +44,8 @@ public class DaoService {
 	public static void sucess() {
 		JOptionPane.showMessageDialog(null, "Welcome!");
 	}
+	
+	public static void userNotFound() {
+		JOptionPane.showMessageDialog(null, "User not found!");
+	}
 }

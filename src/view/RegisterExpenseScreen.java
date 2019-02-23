@@ -12,6 +12,8 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.TitledBorder;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class RegisterExpenseScreen extends JInternalFrame {
 	private JTextField txtName;
@@ -100,6 +102,11 @@ public class RegisterExpenseScreen extends JInternalFrame {
 		getContentPane().add(btRegister);
 		
 		JButton btCancel = new JButton("Cancel");
+		btCancel.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+			}
+		});
 		btCancel.setBounds(12, 383, 117, 25);
 		getContentPane().add(btCancel);
 

@@ -1,6 +1,5 @@
 package controller;
 
-import model.User;
 import view.LoginScreen;
 
 public class AppController {

@@ -1,4 +1,3 @@
-import view.LoginScreen;
 import static controller.AppController.*;
 
 public class App {
