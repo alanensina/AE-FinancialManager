@@ -19,14 +19,14 @@ import service.DaoService;
 public class UserDAO implements UserRepository {
 	
 	private DaoService service = new DaoService();
-	private Connection con = null;
 
 	public UserDAO() {
-		con = ConnectionFactory.getConnection();
+		
 	}
 
 	@Override
 	public boolean register(Object obj) {
+		Connection con = ConnectionFactory.getConnection();
 		String sql = "insert into user (name, surname, phone, email, birthday, username, user_password, profession) values (?,?,?,?,?,?,?,?)";
 		User user = new User();
 
@@ -66,6 +66,7 @@ public class UserDAO implements UserRepository {
 
 	@Override
 	public boolean delete(Object obj) {
+		Connection con = ConnectionFactory.getConnection();
 		/*
 		 * Lembrete: Ao deletar o usuário, deve-se deletar seus registros na tabela
 		 * Income e Expense
@@ -77,6 +78,7 @@ public class UserDAO implements UserRepository {
 	// Falta testar esse método
 	@Override
 	public boolean update(Object obj) {
+		Connection con = ConnectionFactory.getConnection();
 		String sql = "update user set name = ?," + " surname = ?, phone = ?, email = ?, "
 				+ "birthday = ?, username = ?, user_password = ?, " + "profession = ?, active = ? where id = ?";
 		User user = new User();
@@ -116,6 +118,7 @@ public class UserDAO implements UserRepository {
 
 	@Override
 	public List<User> list() {
+		Connection con = ConnectionFactory.getConnection();
 
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
@@ -153,6 +156,7 @@ public class UserDAO implements UserRepository {
 
 	@Override
 	public boolean updateStatus(Object obj, boolean active) {
+		Connection con = ConnectionFactory.getConnection();
 		String sql = "update user set active = ? where id = ?";
 		PreparedStatement stmt = null;
 		User user = new User();
@@ -183,6 +187,7 @@ public class UserDAO implements UserRepository {
 
 	@Override
 	public int findID(Object obj) {
+		Connection con = ConnectionFactory.getConnection();
 		User user = new User();
 		String sql = "select * from user where username = ?";
 		PreparedStatement stmt = null;
@@ -231,6 +236,7 @@ public class UserDAO implements UserRepository {
 
 	@Override
 	public User findUserByID(int id) {
+		Connection con = ConnectionFactory.getConnection();
 		User user = new User();
 		String sql = "select * from user where id = ?";
 		PreparedStatement stmt = null;
@@ -273,6 +279,7 @@ public class UserDAO implements UserRepository {
 
 	@Override
 	public User retrieveUser(Object obj) {
+		Connection con = ConnectionFactory.getConnection();
 		User user = new User();
 		if (obj instanceof User) {
 			user = (User) obj;

@@ -48,4 +48,8 @@ public class DaoService {
 	public static void userNotFound() {
 		JOptionPane.showMessageDialog(null, "User not found!");
 	}
+	
+	public static void emptyLogin() {
+		JOptionPane.showMessageDialog(null, "One or more fields are empty.");
+	}
 }

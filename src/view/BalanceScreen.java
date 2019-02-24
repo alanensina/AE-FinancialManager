@@ -13,6 +13,8 @@ import javax.swing.JOptionPane;
 import javax.swing.border.TitledBorder;
 import javax.swing.border.LineBorder;
 import java.awt.Color;
+import java.awt.Dimension;
+
 import javax.swing.table.DefaultTableModel;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
@@ -177,4 +179,9 @@ public class BalanceScreen extends JInternalFrame {
 		getContentPane().add(btCancel);
 
 	}
+	
+	public void setPosition() {
+        Dimension d = this.getDesktopPane().getSize();
+        this.setLocation((d.width - this.getSize().width) / 2, (d.height - this.getSize().height) / 2);
+    }
 }

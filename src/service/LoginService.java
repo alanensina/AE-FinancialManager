@@ -18,6 +18,11 @@ public class LoginService {
 	public boolean checkLogin(User user) {
 		List<User> list = new LinkedList<>();
 		list = dao.list();
+		
+		if(emptyFieldsOnLoginScreen(user)) {
+			emptyLogin();
+			return false;
+		}
 
 		for (User user2 : list) {
 			if (checkLoginAndPassword(user, user2)) {
@@ -33,8 +38,13 @@ public class LoginService {
 		return user2.getUsername().equals(user.getUsername()) && user2.getPassword().equals(user.getPassword());
 	}
 	
+	public boolean emptyFieldsOnLoginScreen(User user) {
+		return user.getUsername().equals("") || user.getPassword().equals("");
+	}
+	
 	public User getUser(User user) {
 		List<User> list = new LinkedList<>();
+		
 		list = dao.list();
 		User userLogged = new User();
 		
@@ -47,8 +57,4 @@ public class LoginService {
 		return userLogged;
 	}
 
-	
-	
-	
-	
 }

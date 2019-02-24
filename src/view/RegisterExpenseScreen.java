@@ -1,5 +1,6 @@
 package view;
 
+import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.Font;
 
@@ -111,5 +112,10 @@ public class RegisterExpenseScreen extends JInternalFrame {
 		getContentPane().add(btCancel);
 
 	}
+	
+	public void setPosition() {
+        Dimension d = this.getDesktopPane().getSize();
+        this.setLocation((d.width - this.getSize().width) / 2, (d.height - this.getSize().height) / 2);
+    }
 
 }

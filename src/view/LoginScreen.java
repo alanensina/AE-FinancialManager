@@ -87,10 +87,10 @@ public class LoginScreen extends JFrame {
 				LoginController controller = new LoginController();
 				if (controller.sendToService(user)) {
 					dispose();
-					//User user2 = controller.getUserLogged(user);
+				User user2 = controller.getUserLogged(user);
 					
-				//MainScreen mainScreen = new MainScreen(user2);
-				MainScreen mainScreen = new MainScreen();
+				MainScreen mainScreen = new MainScreen(user2);
+				//MainScreen mainScreen = new MainScreen();
 					
 				}
 			}

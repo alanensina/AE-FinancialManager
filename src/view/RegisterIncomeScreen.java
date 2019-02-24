@@ -1,5 +1,6 @@
 package view;
 
+import java.awt.Dimension;
 import java.awt.EventQueue;
 
 import javax.swing.JInternalFrame;
@@ -109,6 +110,10 @@ public class RegisterIncomeScreen extends JInternalFrame {
 		});
 		btCancel.setBounds(12, 383, 117, 25);
 		getContentPane().add(btCancel);
-
 	}
+	
+	public void setPosition() {
+        Dimension d = this.getDesktopPane().getSize();
+        this.setLocation((d.width - this.getSize().width) / 2, (d.height - this.getSize().height) / 2);
+    }
 }
