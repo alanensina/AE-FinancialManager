@@ -17,7 +17,7 @@ public class RegisterUserService {
 				&& validateData(user.getBirthday()) && validateProfession(user.getProfession())
 				&& validateUsername(user.getUsername()) && validatePassword(user.getPassword())
 				&& validatePhone(user.getPhone())) {
-			persist(user);
+			dao.register(user);
 			return true;
 		} else {
 			JOptionPane.showMessageDialog(null,
@@ -25,13 +25,5 @@ public class RegisterUserService {
 			throw new RuntimeException();
 		}
 	}
-	
-	public static void persist(User user) {
-		Object obj = user;
-		if(dao.register(obj)) {
-			JOptionPane.showMessageDialog(null, "Welcome "+user.toString()+", now you can log in to the system!");
-		} else {
-			JOptionPane.showMessageDialog(null, "There was an error saving to database (RegisterUserController.persist)");
-		}
-	}
+
 }

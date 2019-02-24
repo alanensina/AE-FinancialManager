@@ -50,6 +50,7 @@ public class UserDAO implements UserRepository {
 			stmt.setString(7, user.getPassword());
 			stmt.setString(8, user.getProfession());
 			stmt.executeUpdate();
+			JOptionPane.showMessageDialog(null, "Welcome "+user.toString()+", now you can log in to the system!");
 
 		} catch (SQLException ex) {
 			service.emptyFields(user);
@@ -60,7 +61,6 @@ public class UserDAO implements UserRepository {
 		} finally {
 			ConnectionFactory.closeConnection(con, stmt);
 		}
-		JOptionPane.showMessageDialog(null, "User registered successfully.");
 		return true;
 	}
 

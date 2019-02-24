@@ -41,10 +41,6 @@ public class DaoService {
 		JOptionPane.showMessageDialog(null, "Username or password doesn't match.");
 	}
 	
-	public static void sucess() {
-		JOptionPane.showMessageDialog(null, "Welcome!");
-	}
-	
 	public static void userNotFound() {
 		JOptionPane.showMessageDialog(null, "User not found!");
 	}

@@ -104,4 +104,12 @@ public class SyntaxService {
 		}
 	}
 
+	public static boolean validateSimpleText(String text) {
+		return text.matches("[a-zA-Z0-9\\s]+");		
+	}
+	
+	public static boolean validadeValue(String value) {
+		return value.matches("^[\\d,.?!]+$");
+	}
+
 }

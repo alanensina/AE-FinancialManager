@@ -15,15 +15,12 @@ import repository.IncomeRepository;
 public class IncomeDAO implements IncomeRepository {
 	private Connection con = null;
 
-	public IncomeDAO() {
-		con = ConnectionFactory.getConnection();
-	}
+	public IncomeDAO() {}
 
 	@Override
 	public boolean register(Income income, User user) {
+		con = ConnectionFactory.getConnection();
 		String sql = "insert into income (user, name, description, value, date) values (?, ?, ?, ?, ?)";
-		UserDAO dao = new UserDAO();
-		user.setId(dao.findID(user.getUsername()));
 
 		PreparedStatement stmt = null;
 
@@ -35,6 +32,7 @@ public class IncomeDAO implements IncomeRepository {
 			stmt.setDouble(4, income.getValue());
 			stmt.setString(5, income.getDate());
 			stmt.executeUpdate();
+			JOptionPane.showMessageDialog(null, "Income registered successfully!");
 		} catch (SQLException ex) {
 			JOptionPane.showMessageDialog(null, "There was an error saving to database (IncomeDAO.register())" + ex);
 			throw new RuntimeException(ex);
@@ -46,6 +44,7 @@ public class IncomeDAO implements IncomeRepository {
 
 	@Override
 	public boolean deleteByID(int id) {
+		con = ConnectionFactory.getConnection();
 		String sql = "delete from income where id = ?";
 		PreparedStatement stmt = null;
 

@@ -26,7 +26,6 @@ public class LoginService {
 
 		for (User user2 : list) {
 			if (checkLoginAndPassword(user, user2)) {
-				sucess();
 				return true;
 			}
 		}

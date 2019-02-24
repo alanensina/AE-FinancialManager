@@ -1,28 +1,30 @@
 package view;
 
-import java.awt.EventQueue;
-
-import javax.swing.JInternalFrame;
-import javax.swing.JTable;
-import javax.swing.JComboBox;
-import javax.swing.DefaultComboBoxModel;
-import java.awt.Font;
-import javax.swing.JPanel;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.border.TitledBorder;
-import javax.swing.border.LineBorder;
 import java.awt.Color;
 import java.awt.Dimension;
-
-import javax.swing.table.DefaultTableModel;
-import javax.swing.JButton;
-import java.awt.event.ActionListener;
+import java.awt.EventQueue;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JInternalFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JTable;
+import javax.swing.border.LineBorder;
+import javax.swing.border.TitledBorder;
+import javax.swing.table.DefaultTableModel;
+
+import model.User;
 
 public class BalanceScreen extends JInternalFrame {
 	private JTable tbExpenses;
 	private JTable tbIncomes;
+	private User user;
 
 	/**
 	 * Launch the application.
@@ -40,10 +42,20 @@ public class BalanceScreen extends JInternalFrame {
 		});
 	}
 
+	
+	public BalanceScreen(User user) {
+		this.user = user;
+		initializeScreen();
+	}
+	
+	public BalanceScreen() {
+		initializeScreen();
+	}
+	
 	/**
 	 * Create the frame.
 	 */
-	public BalanceScreen() {
+	private void initializeScreen() {
 		setTitle("Balance Screen");
 		setBounds(100, 100, 622, 562);
 		getContentPane().setLayout(null);
@@ -177,9 +189,12 @@ public class BalanceScreen extends JInternalFrame {
 		});
 		btCancel.setBounds(176, 481, 117, 25);
 		getContentPane().add(btCancel);
-
 	}
 	
+	public User getUser() {
+		return this.user;
+	}
+
 	public void setPosition() {
         Dimension d = this.getDesktopPane().getSize();
         this.setLocation((d.width - this.getSize().width) / 2, (d.height - this.getSize().height) / 2);

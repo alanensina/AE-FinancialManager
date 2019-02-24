@@ -15,24 +15,24 @@ import repository.ExpenseRepository;
 public class ExpenseDAO implements ExpenseRepository {
 	private Connection con = null;
 
-	public ExpenseDAO() {
-		con = ConnectionFactory.getConnection();
-	}
+	public ExpenseDAO() {}
 
 	@Override
 	public boolean register(Expense expense, User user) {
+		con = ConnectionFactory.getConnection();
 		String sql = "insert into expense (user, name, description, value, date) values (?, ?, ?, ?, ?)";
 
 		PreparedStatement stmt = null;
 
 		try {
 			stmt = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-			stmt.setInt(1, user.getId()); // Foreign key
+			stmt.setInt(1, user.getId());
 			stmt.setString(2, expense.getName());
 			stmt.setString(3, expense.getDescription());
 			stmt.setDouble(4, expense.getValue());
 			stmt.setString(5, expense.getDate());
 			stmt.executeUpdate();
+			JOptionPane.showMessageDialog(null, "Expense registered successfully!");
 		} catch (SQLException ex) {
 			JOptionPane.showMessageDialog(null, "There was an error saving to database (ExpenseDAO.register())" + ex);
 			throw new RuntimeException(ex);
@@ -44,6 +44,7 @@ public class ExpenseDAO implements ExpenseRepository {
 
 	@Override
 	public boolean deleteByID(int id) {
+		con = ConnectionFactory.getConnection();
 		String sql = "delete from expense where id = ?";
 		PreparedStatement stmt = null;
 

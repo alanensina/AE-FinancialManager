@@ -52,10 +52,6 @@ public class MainScreen extends JFrame {
 		return user;
 	}
 
-	public void setUser(User user) {
-		this.user = user;
-	}
-
 	private void initialize() {
 		frmAeFinancialManager = new JFrame();
 		frmAeFinancialManager.getContentPane().setBackground(Color.DARK_GRAY);
@@ -90,7 +86,7 @@ public class MainScreen extends JFrame {
 		JMenuItem menuRegisterExpense = new JMenuItem("Expense");
 		menuRegisterExpense.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				RegisterExpenseScreen screen = new RegisterExpenseScreen();
+				RegisterExpenseScreen screen = new RegisterExpenseScreen(getUser());
 				desktopPane.add(screen);
 				screen.setVisible(true);
 				screen.setPosition();
@@ -102,7 +98,7 @@ public class MainScreen extends JFrame {
 		JMenuItem menuRegisterIncome = new JMenuItem("Income");
 		menuRegisterIncome.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				RegisterIncomeScreen screen = new RegisterIncomeScreen();
+				RegisterIncomeScreen screen = new RegisterIncomeScreen(getUser());
 				desktopPane.add(screen);
 				screen.setVisible(true);
 				screen.setPosition();
@@ -117,7 +113,7 @@ public class MainScreen extends JFrame {
 		menuBalance.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
-				BalanceScreen screen = new BalanceScreen();
+				BalanceScreen screen = new BalanceScreen(getUser());
 				desktopPane.add(screen);
 				screen.setVisible(true);
 				screen.setPosition();

@@ -3,6 +3,8 @@ package view;
 import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -13,13 +15,17 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.TitledBorder;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
+
+import controller.RegisterExpenseController;
+import model.Expense;
+import model.User;
 
 public class RegisterExpenseScreen extends JInternalFrame {
 	private JTextField txtName;
 	private JTextField txtDate;
 	private JTextField txtValue;
+	private User user;
+	private Expense expense = new Expense();
 
 	/**
 	 * Launch the application.
@@ -36,11 +42,24 @@ public class RegisterExpenseScreen extends JInternalFrame {
 			}
 		});
 	}
+	
+	public User getUser() {
+		return user;
+	}
 
+	public RegisterExpenseScreen(User user) {
+		this.user = user;
+		initializeScreen();
+	}
+	
+	public RegisterExpenseScreen() {
+		initializeScreen();
+	}
+	
 	/**
 	 * Create the frame.
 	 */
-	public RegisterExpenseScreen() {
+	public void initializeScreen() {
 		setTitle("Register expense");
 		setBounds(100, 100, 373, 455);
 		getContentPane().setLayout(null);
@@ -99,6 +118,24 @@ public class RegisterExpenseScreen extends JInternalFrame {
 		txtValue.setColumns(10);
 		
 		JButton btRegister = new JButton("Register");
+		btRegister.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				expense.setName(txtName.getText());
+				expense.setUser(getUser());
+				expense.setDescription(txtDescription.getText());
+				expense.setValue(Double.parseDouble(txtValue.getText()));
+				expense.setDate(txtDate.getText());
+				
+				RegisterExpenseController controller = new RegisterExpenseController(getUser());
+				if(controller.sendToService(expense, getUser())) {
+					txtName.setText("");
+					txtDescription.setText("");
+					txtValue.setText("");
+					txtDate.setText("");
+				}
+				
+			}
+		});
 		btRegister.setBounds(237, 383, 117, 25);
 		getContentPane().add(btRegister);
 		
@@ -110,7 +147,6 @@ public class RegisterExpenseScreen extends JInternalFrame {
 		});
 		btCancel.setBounds(12, 383, 117, 25);
 		getContentPane().add(btCancel);
-
 	}
 	
 	public void setPosition() {

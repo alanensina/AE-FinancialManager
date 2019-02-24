@@ -2,24 +2,31 @@ package view;
 
 import java.awt.Dimension;
 import java.awt.EventQueue;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
-import javax.swing.ImageIcon;
-import javax.swing.SwingConstants;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.border.TitledBorder;
-import java.awt.Font;
-import javax.swing.JTextField;
 import javax.swing.JTextArea;
-import javax.swing.JButton;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
+import javax.swing.JTextField;
+import javax.swing.SwingConstants;
+import javax.swing.border.TitledBorder;
+
+import controller.RegisterIncomeController;
+import model.Income;
+import model.User;
 
 public class RegisterIncomeScreen extends JInternalFrame {
 	private JTextField txtName;
 	private JTextField txtDate;
 	private JTextField txtValue;
+	private User user;
+	private Income income = new Income();
 
 	/**
 	 * Launch the application.
@@ -37,10 +44,20 @@ public class RegisterIncomeScreen extends JInternalFrame {
 		});
 	}
 
+	
+	public RegisterIncomeScreen() {
+		initializeScreen();
+	}
+	
+	public RegisterIncomeScreen(User user) {
+		this.user = user;
+		initializeScreen();
+	}
+	
 	/**
 	 * Create the frame.
 	 */
-	public RegisterIncomeScreen() {
+	private void initializeScreen() {
 		setTitle("Register income");
 		setBounds(100, 100, 373, 455);
 		getContentPane().setLayout(null);
@@ -99,6 +116,23 @@ public class RegisterIncomeScreen extends JInternalFrame {
 		txtValue.setColumns(10);
 		
 		JButton btRegister = new JButton("Register");
+		btRegister.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				income.setName(txtName.getText());
+				income.setUser(getUser());
+				income.setDescription(txtDescription.getText());
+				income.setValue(Double.parseDouble(txtValue.getText()));
+				income.setDate(txtDate.getText());
+				
+				RegisterIncomeController controller = new RegisterIncomeController(getUser());
+				if(controller.sendToService(income, getUser())) {
+					txtName.setText("");
+					txtDescription.setText("");
+					txtValue.setText("");
+					txtDate.setText("");
+				}
+			}
+		});
 		btRegister.setBounds(237, 383, 117, 25);
 		getContentPane().add(btRegister);
 		
@@ -111,9 +145,13 @@ public class RegisterIncomeScreen extends JInternalFrame {
 		btCancel.setBounds(12, 383, 117, 25);
 		getContentPane().add(btCancel);
 	}
-	
+
 	public void setPosition() {
         Dimension d = this.getDesktopPane().getSize();
         this.setLocation((d.width - this.getSize().width) / 2, (d.height - this.getSize().height) / 2);
     }
+	
+	public User getUser() {
+		return this.user;
+	}
 }
