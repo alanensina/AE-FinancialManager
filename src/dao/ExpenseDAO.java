@@ -1,6 +1,7 @@
 package dao;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -30,7 +31,7 @@ public class ExpenseDAO implements ExpenseRepository {
 			stmt.setString(2, expense.getName());
 			stmt.setString(3, expense.getDescription());
 			stmt.setDouble(4, expense.getValue());
-			stmt.setString(5, expense.getDate());
+			stmt.setDate(5, Date.valueOf(expense.getDate()));
 			stmt.executeUpdate();
 			JOptionPane.showMessageDialog(null, "Expense registered successfully!");
 		} catch (SQLException ex) {

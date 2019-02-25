@@ -5,6 +5,7 @@ import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.time.ZoneId;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -19,10 +20,10 @@ import javax.swing.border.TitledBorder;
 import controller.RegisterExpenseController;
 import model.Expense;
 import model.User;
+import com.toedter.calendar.JDateChooser;
 
 public class RegisterExpenseScreen extends JInternalFrame {
 	private JTextField txtName;
-	private JTextField txtDate;
 	private JTextField txtValue;
 	private User user;
 	private Expense expense = new Expense();
@@ -91,11 +92,6 @@ public class RegisterExpenseScreen extends JInternalFrame {
 		lbDate.setBounds(12, 53, 70, 15);
 		panelDetailsExpense.add(lbDate);
 		
-		txtDate = new JTextField();
-		txtDate.setBounds(95, 51, 106, 19);
-		panelDetailsExpense.add(txtDate);
-		txtDate.setColumns(10);
-		
 		JLabel lbDescription = new JLabel("Description");
 		lbDescription.setFont(new Font("Dialog", Font.PLAIN, 12));
 		lbDescription.setBounds(12, 80, 81, 15);
@@ -117,6 +113,10 @@ public class RegisterExpenseScreen extends JInternalFrame {
 		panelDetailsExpense.add(txtValue);
 		txtValue.setColumns(10);
 		
+		JDateChooser dateChooser = new JDateChooser();
+		dateChooser.setBounds(95, 49, 238, 19);
+		panelDetailsExpense.add(dateChooser);
+		
 		JButton btRegister = new JButton("Register");
 		btRegister.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -124,14 +124,13 @@ public class RegisterExpenseScreen extends JInternalFrame {
 				expense.setUser(getUser());
 				expense.setDescription(txtDescription.getText());
 				expense.setValue(Double.parseDouble(txtValue.getText()));
-				expense.setDate(txtDate.getText());
+				expense.setDate(dateChooser.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
 				
 				RegisterExpenseController controller = new RegisterExpenseController(getUser());
 				if(controller.sendToService(expense, getUser())) {
 					txtName.setText("");
 					txtDescription.setText("");
 					txtValue.setText("");
-					txtDate.setText("");
 				}
 				
 			}
@@ -153,5 +152,4 @@ public class RegisterExpenseScreen extends JInternalFrame {
         Dimension d = this.getDesktopPane().getSize();
         this.setLocation((d.width - this.getSize().width) / 2, (d.height - this.getSize().height) / 2);
     }
-
 }

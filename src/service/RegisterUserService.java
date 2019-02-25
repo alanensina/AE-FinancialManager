@@ -14,7 +14,7 @@ public class RegisterUserService {
 
 	public boolean validateUser(User user) {
 		if (validateFirstName(user.getName()) && validateLastName(user.getSurname()) && validateEmail(user.getEmail())
-				&& validateData(user.getBirthday()) && validateProfession(user.getProfession())
+				&&  validateProfession(user.getProfession())
 				&& validateUsername(user.getUsername()) && validatePassword(user.getPassword())
 				&& validatePhone(user.getPhone())) {
 			dao.register(user);

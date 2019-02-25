@@ -5,6 +5,7 @@ import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.time.ZoneId;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -20,10 +21,10 @@ import javax.swing.border.TitledBorder;
 import controller.RegisterIncomeController;
 import model.Income;
 import model.User;
+import com.toedter.calendar.JDateChooser;
 
 public class RegisterIncomeScreen extends JInternalFrame {
 	private JTextField txtName;
-	private JTextField txtDate;
 	private JTextField txtValue;
 	private User user;
 	private Income income = new Income();
@@ -89,11 +90,6 @@ public class RegisterIncomeScreen extends JInternalFrame {
 		lbDate.setBounds(12, 53, 70, 15);
 		panelDetailsIncome.add(lbDate);
 		
-		txtDate = new JTextField();
-		txtDate.setBounds(95, 51, 106, 19);
-		panelDetailsIncome.add(txtDate);
-		txtDate.setColumns(10);
-		
 		JLabel lbDescription = new JLabel("Description");
 		lbDescription.setFont(new Font("Dialog", Font.PLAIN, 12));
 		lbDescription.setBounds(12, 80, 81, 15);
@@ -115,6 +111,10 @@ public class RegisterIncomeScreen extends JInternalFrame {
 		panelDetailsIncome.add(txtValue);
 		txtValue.setColumns(10);
 		
+		JDateChooser dateChooser = new JDateChooser();
+		dateChooser.setBounds(95, 49, 238, 19);
+		panelDetailsIncome.add(dateChooser);
+		
 		JButton btRegister = new JButton("Register");
 		btRegister.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -122,14 +122,13 @@ public class RegisterIncomeScreen extends JInternalFrame {
 				income.setUser(getUser());
 				income.setDescription(txtDescription.getText());
 				income.setValue(Double.parseDouble(txtValue.getText()));
-				income.setDate(txtDate.getText());
+				income.setDate(dateChooser.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
 				
 				RegisterIncomeController controller = new RegisterIncomeController(getUser());
 				if(controller.sendToService(income, getUser())) {
 					txtName.setText("");
 					txtDescription.setText("");
 					txtValue.setText("");
-					txtDate.setText("");
 				}
 			}
 		});

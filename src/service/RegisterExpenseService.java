@@ -24,7 +24,7 @@ public class RegisterExpenseService {
 
 	public boolean validateData(Expense expense, User user) {
 		if (validateSimpleText(expense.getName()) && validadeValue(String.valueOf(expense.getValue()))
-				&& SyntaxService.validateData(expense.getDate()) && expense.getDescription().length() <= 255) {
+				&& expense.getDescription().length() <= 255) {
 			dao.register(expense, user);
 			return true;
 		}

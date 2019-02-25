@@ -1,6 +1,7 @@
 package dao;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -27,7 +28,7 @@ public class UserDAO implements UserRepository {
 	@Override
 	public boolean register(Object obj) {
 		Connection con = ConnectionFactory.getConnection();
-		String sql = "insert into user (name, surname, phone, email, birthday, username, user_password, profession) values (?,?,?,?,?,?,?,?)";
+		String sql = "insert into user (name, surname, phone, email, birthday, username, password, profession) values (?,?,?,?,?,?,?,?)";
 		User user = new User();
 
 		if (obj instanceof User) {
@@ -45,7 +46,7 @@ public class UserDAO implements UserRepository {
 			stmt.setString(2, user.getSurname());
 			stmt.setString(3, user.getPhone());
 			stmt.setString(4, user.getEmail());
-			stmt.setString(5, user.getBirthday());
+			stmt.setDate(5, Date.valueOf(user.getBirthday()));
 			stmt.setString(6, user.getUsername());
 			stmt.setString(7, user.getPassword());
 			stmt.setString(8, user.getProfession());
@@ -80,7 +81,7 @@ public class UserDAO implements UserRepository {
 	public boolean update(Object obj) {
 		Connection con = ConnectionFactory.getConnection();
 		String sql = "update user set name = ?," + " surname = ?, phone = ?, email = ?, "
-				+ "birthday = ?, username = ?, user_password = ?, " + "profession = ?, active = ? where id = ?";
+				+ "birthday = ?, username = ?, password = ?, " + "profession = ?, active = ? where id = ?";
 		User user = new User();
 
 		if (obj instanceof User) {
@@ -98,7 +99,7 @@ public class UserDAO implements UserRepository {
 			stmt.setString(2, user.getSurname());
 			stmt.setString(3, user.getPhone());
 			stmt.setString(4, user.getEmail());
-			stmt.setString(5, user.getBirthday());
+			stmt.setDate(5, Date.valueOf(user.getBirthday()));
 			stmt.setString(6, user.getUsername());
 			stmt.setString(7, user.getPassword());
 			stmt.setString(8, user.getProfession());
@@ -138,9 +139,9 @@ public class UserDAO implements UserRepository {
 				user.setSurname(rs.getString("surname"));
 				user.setPhone(rs.getString("phone"));
 				user.setEmail(rs.getString("email"));
-				user.setBirthday(rs.getString("birthday"));
+				user.setBirthday(rs.getDate("birthday").toLocalDate());
 				user.setUsername(rs.getString("username"));
-				user.setPassword(rs.getString("user_password"));
+				user.setPassword(rs.getString("password"));
 				user.setProfession(rs.getString("profession"));
 
 				users.add(user);
@@ -210,9 +211,9 @@ public class UserDAO implements UserRepository {
 				user.setSurname(rs.getString("surname"));
 				user.setPhone(rs.getString("phone"));
 				user.setEmail(rs.getString("email"));
-				user.setBirthday(rs.getString("birthday"));
+				user.setBirthday(rs.getDate("birthday").toLocalDate());
 				user.setUsername(rs.getString("username"));
-				user.setPassword(rs.getString("user_password"));
+				user.setPassword(rs.getString("password"));
 				user.setProfession(rs.getString("profession"));
 
 				int active = Integer.parseInt(rs.getString("active"));
@@ -253,9 +254,9 @@ public class UserDAO implements UserRepository {
 				user.setSurname(rs.getString("surname"));
 				user.setPhone(rs.getString("phone"));
 				user.setEmail(rs.getString("email"));
-				user.setBirthday(rs.getString("birthday"));
+				user.setBirthday(rs.getDate("birthday").toLocalDate());
 				user.setUsername(rs.getString("username"));
-				user.setPassword(rs.getString("user_password"));
+				user.setPassword(rs.getString("password"));
 				user.setProfession(rs.getString("profession"));
 
 				int active = Integer.parseInt(rs.getString("active"));
@@ -303,9 +304,9 @@ public class UserDAO implements UserRepository {
 				user.setSurname(rs.getString("surname"));
 				user.setPhone(rs.getString("phone"));
 				user.setEmail(rs.getString("email"));
-				user.setBirthday(rs.getString("birthday"));
+				user.setBirthday(rs.getDate("birthday").toLocalDate());
 				user.setUsername(rs.getString("username"));
-				user.setPassword(rs.getString("user_password"));
+				user.setPassword(rs.getString("password"));
 				user.setProfession(rs.getString("profession"));
 
 				int active = Integer.parseInt(rs.getString("active"));

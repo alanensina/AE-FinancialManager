@@ -24,7 +24,7 @@ public class RegisterIncomeService {
 
 	public boolean validateData(Income income, User user) {
 		if (validateSimpleText(income.getName()) && validadeValue(String.valueOf(income.getValue()))
-				&& SyntaxService.validateData(income.getDate()) && income.getDescription().length() <= 255) {
+				&&  income.getDescription().length() <= 255) {
 			dao.register(income, user);
 			return true;
 		}

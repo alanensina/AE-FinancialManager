@@ -1,6 +1,7 @@
 package dao;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -26,11 +27,11 @@ public class IncomeDAO implements IncomeRepository {
 
 		try {
 			stmt = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-			stmt.setInt(1, user.getId()); // Foreign key
+			stmt.setInt(1, user.getId()); 
 			stmt.setString(2, income.getName());
 			stmt.setString(3, income.getDescription());
 			stmt.setDouble(4, income.getValue());
-			stmt.setString(5, income.getDate());
+			stmt.setDate(5, Date.valueOf(income.getDate()));
 			stmt.executeUpdate();
 			JOptionPane.showMessageDialog(null, "Income registered successfully!");
 		} catch (SQLException ex) {

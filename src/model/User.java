@@ -1,6 +1,7 @@
 package model;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.List;
 
 public class User implements Serializable{
@@ -12,7 +13,7 @@ public class User implements Serializable{
 	private String surname;
 	private String phone;
 	private String email;
-	private String birthday;
+	private LocalDate birthday;
 	private String username;
 	private String password;
 	private String profession;
@@ -22,7 +23,7 @@ public class User implements Serializable{
 	
 	public User() {}	
 
-	public User(String name, String surname, String phone, String email, String birthday, String username,
+	public User(String name, String surname, String phone, String email, LocalDate birthday, String username,
 			String password, String profession, boolean active, List<Income> incomes, List<Expense> expenses) {
 		this.name = name;
 		this.surname = surname;
@@ -37,7 +38,7 @@ public class User implements Serializable{
 		this.expenses = expenses;
 	}
 	
-	public User(int id, String name, String surname, String phone, String email, String birthday, String username,
+	public User(int id, String name, String surname, String phone, String email, LocalDate birthday, String username,
 			String password, String profession, boolean active, List<Income> incomes, List<Expense> expenses) {
 		this.id = id;
 		this.name = name;
@@ -93,11 +94,11 @@ public class User implements Serializable{
 		this.email = email;
 	}
 
-	public String getBirthday() {
+	public LocalDate getBirthday() {
 		return birthday;
 	}
 
-	public void setBirthday(String birthday) {
+	public void setBirthday(LocalDate birthday) {
 		this.birthday = birthday;
 	}
 

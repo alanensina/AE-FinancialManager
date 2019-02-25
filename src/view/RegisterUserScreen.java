@@ -6,6 +6,7 @@ import java.awt.Font;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.time.ZoneId;
 import java.util.List;
 
 import javax.swing.ImageIcon;
@@ -17,13 +18,14 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.TitledBorder;
 
+import com.toedter.calendar.JDateChooser;
+
 import controller.RegisterUserController;
 import model.User;
 
 public class RegisterUserScreen extends JFrame {
 	private JTextField txtName;
 	private JTextField txtSurname;
-	private JTextField txtBirthday;
 	private JTextField txtEmail;
 	private JTextField txtPhone;
 	private JTextField txtProfession;
@@ -97,11 +99,6 @@ public class RegisterUserScreen extends JFrame {
 		lbBirthday.setBounds(12, 80, 58, 15);
 		panelPersonalDetails.add(lbBirthday);
 
-		txtBirthday = new JTextField();
-		txtBirthday.setBounds(92, 78, 262, 19);
-		panelPersonalDetails.add(txtBirthday);
-		txtBirthday.setColumns(10);
-
 		JLabel lbProfession = new JLabel("Profession");
 		lbProfession.setFont(new Font("Dialog", Font.PLAIN, 12));
 		lbProfession.setBounds(12, 109, 70, 15);
@@ -111,6 +108,10 @@ public class RegisterUserScreen extends JFrame {
 		txtProfession.setBounds(92, 107, 262, 19);
 		panelPersonalDetails.add(txtProfession);
 		txtProfession.setColumns(10);
+		
+		JDateChooser dateChooser = new JDateChooser();
+		dateChooser.setBounds(92, 78, 262, 19);
+		panelPersonalDetails.add(dateChooser);
 
 		JPanel panelContacts = new JPanel();
 		panelContacts.setBorder(new TitledBorder(null, "Contacts", TitledBorder.LEADING, TitledBorder.TOP, null, null));
@@ -172,7 +173,7 @@ public class RegisterUserScreen extends JFrame {
 				User user = new User();
 				user.setName(txtName.getText());
 				user.setSurname(txtSurname.getText());
-				user.setBirthday(txtBirthday.getText());
+				user.setBirthday(dateChooser.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
 				user.setEmail(txtEmail.getText());
 				user.setProfession(txtProfession.getText());
 				user.setUsername(txtUsername.getText());

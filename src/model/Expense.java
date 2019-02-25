@@ -1,6 +1,7 @@
 package model;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 
 public class Expense implements Serializable{
 	
@@ -11,18 +12,18 @@ public class Expense implements Serializable{
 	private String name;
 	private String description;
 	private double value;
-	private String date;
+	private LocalDate date;
 	
 	public Expense() {}
 
-	public Expense(String name, String description, double value, String date) {
+	public Expense(String name, String description, double value, LocalDate date) {
 		this.name = name;
 		this.description = description;
 		this.value = value;
 		this.date = date;
 	}
 	
-	public Expense(int id, User user, String name, String description, double value, String date) {
+	public Expense(int id, User user, String name, String description, double value, LocalDate date) {
 		this.id = id;
 		this.user = user;
 		this.name = name;
@@ -71,11 +72,11 @@ public class Expense implements Serializable{
 		this.value = value;
 	}
 
-	public String getDate() {
+	public LocalDate getDate() {
 		return date;
 	}
 
-	public void setDate(String date) {
+	public void setDate(LocalDate date) {
 		this.date = date;
 	}
 
