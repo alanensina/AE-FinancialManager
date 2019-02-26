@@ -6,11 +6,13 @@ import java.awt.Font;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.ParseException;
 import java.time.ZoneId;
 import java.util.List;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JFormattedTextField;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -27,7 +29,6 @@ public class RegisterUserScreen extends JFrame {
 	private JTextField txtName;
 	private JTextField txtSurname;
 	private JTextField txtEmail;
-	private JTextField txtPhone;
 	private JTextField txtProfession;
 	private JTextField txtUsername;
 	private JTextField txtPassword;
@@ -133,11 +134,16 @@ public class RegisterUserScreen extends JFrame {
 		lbPhone.setFont(new Font("Dialog", Font.PLAIN, 12));
 		lbPhone.setBounds(12, 49, 55, 15);
 		panelContacts.add(lbPhone);
-
-		txtPhone = new JTextField();
+		
+		javax.swing.text.MaskFormatter maskPhone = null;
+		try {
+			maskPhone = new javax.swing.text.MaskFormatter("(##) #####-####");
+		} catch (ParseException e1) {
+			e1.printStackTrace();
+		}
+		JFormattedTextField txtPhone = new JFormattedTextField(maskPhone);
 		txtPhone.setBounds(92, 47, 262, 19);
 		panelContacts.add(txtPhone);
-		txtPhone.setColumns(10);
 
 		JPanel panelUsersDetails = new JPanel();
 		panelUsersDetails.setBorder(

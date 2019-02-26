@@ -20,11 +20,20 @@ import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
 
 import model.User;
+import com.toedter.calendar.JMonthChooser;
+import com.toedter.calendar.JYearChooser;
+import com.toedter.calendar.JDateChooser;
+import javax.swing.ImageIcon;
+import javax.swing.SwingConstants;
+import javax.swing.GroupLayout;
+import javax.swing.GroupLayout.Alignment;
+import javax.swing.JScrollPane;
+import javax.swing.ListSelectionModel;
 
 public class BalanceScreen extends JInternalFrame {
-	private JTable tbExpenses;
-	private JTable tbIncomes;
 	private User user;
+	private JTable tbIncome;
+	private JTable tbExpense;
 
 	/**
 	 * Launch the application.
@@ -57,84 +66,12 @@ public class BalanceScreen extends JInternalFrame {
 	 */
 	private void initializeScreen() {
 		setTitle("Balance Screen");
-		setBounds(100, 100, 622, 562);
+		setBounds(100, 100, 622, 660);
 		getContentPane().setLayout(null);
-		
-		JComboBox cbYear = new JComboBox();
-		cbYear.setFont(new Font("Dialog", Font.PLAIN, 12));
-		cbYear.setModel(new DefaultComboBoxModel(new String[] {"2019", "2020"}));
-		cbYear.setBounds(405, 21, 92, 24);
-		getContentPane().add(cbYear);
-		
-		JComboBox cbMonth = new JComboBox();
-		cbMonth.setFont(new Font("Dialog", Font.PLAIN, 12));
-		cbMonth.setModel(new DefaultComboBoxModel(new String[] {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"}));
-		cbMonth.setBounds(283, 21, 110, 24);
-		getContentPane().add(cbMonth);
-		
-		JPanel panelIncomes = new JPanel();
-		panelIncomes.setBorder(new TitledBorder(null, "Incomes", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		panelIncomes.setBounds(12, 57, 287, 254);
-		getContentPane().add(panelIncomes);
-		panelIncomes.setLayout(null);
-		
-		tbIncomes = new JTable();
-		tbIncomes.setModel(new DefaultTableModel(
-			new Object[][] {
-				{null, null},
-				{null, null},
-				{null, null},
-				{null, null},
-				{null, null},
-				{null, null},
-				{null, null},
-				{null, null},
-				{null, null},
-				{null, null},
-				{null, null},
-				{null, null},
-			},
-			new String[] {
-				"Description", "Value"
-			}
-		));
-		tbIncomes.setBounds(12, 23, 263, 219);
-		panelIncomes.add(tbIncomes);
-		
-		JPanel panelExpenses = new JPanel();
-		panelExpenses.setLayout(null);
-		panelExpenses.setBorder(new TitledBorder(new LineBorder(new Color(184, 207, 229)), "Expenses", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(51, 51, 51)));
-		panelExpenses.setBounds(311, 57, 287, 254);
-		getContentPane().add(panelExpenses);
-		
-		tbExpenses = new JTable();
-		tbExpenses.setModel(new DefaultTableModel(
-			new Object[][] {
-				{null, null},
-				{null, null},
-				{null, null},
-				{null, null},
-				{null, null},
-				{null, null},
-				{null, null},
-				{null, null},
-				{null, null},
-				{null, null},
-				{null, null},
-				{null, null},
-			},
-			new String[] {
-					"Description", "Value"
-			}
-		));
-		tbExpenses.getColumnModel().getColumn(0).setPreferredWidth(100);
-		tbExpenses.getColumnModel().getColumn(1).setPreferredWidth(95);
-		tbExpenses.setBounds(12, 23, 263, 219);
-		panelExpenses.add(tbExpenses);
 		
 		JPanel panelBalance = new JPanel();
 		panelBalance.setBorder(new TitledBorder(null, "Balance", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		panelBalance.setBounds(189, 341, 215, 112);
+		panelBalance.setBounds(313, 12, 287, 112);
 		getContentPane().add(panelBalance);
 		panelBalance.setLayout(null);
 		
@@ -168,17 +105,13 @@ public class BalanceScreen extends JInternalFrame {
 		lbValueTotalBalance.setBounds(133, 81, 70, 15);
 		panelBalance.add(lbValueTotalBalance);
 		
-		JButton btRefresh = new JButton("Refresh");
-		btRefresh.setBounds(506, 21, 92, 25);
-		getContentPane().add(btRefresh);
-		
 		JButton btSave = new JButton("Save");
 		btSave.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				JOptionPane.showMessageDialog(null,"Saving to PDF, please wait...");
 			}
 		});
-		btSave.setBounds(305, 481, 117, 25);
+		btSave.setBounds(318, 578, 117, 25);
 		getContentPane().add(btSave);
 		
 		JButton btCancel = new JButton("Cancel");
@@ -187,8 +120,127 @@ public class BalanceScreen extends JInternalFrame {
 				dispose();
 			}
 		});
-		btCancel.setBounds(176, 481, 117, 25);
+		btCancel.setBounds(189, 578, 117, 25);
 		getContentPane().add(btCancel);
+		
+		JPanel panelPeriod = new JPanel();
+		panelPeriod.setBorder(new TitledBorder(null, "Select the period", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		panelPeriod.setBounds(12, 12, 294, 112);
+		getContentPane().add(panelPeriod);
+		panelPeriod.setLayout(null);
+		
+		JDateChooser dtStarts = new JDateChooser();
+		dtStarts.setBounds(12, 36, 143, 19);
+		panelPeriod.add(dtStarts);
+		
+		JDateChooser dtEnds = new JDateChooser();
+		dtEnds.setBounds(12, 67, 143, 19);
+		panelPeriod.add(dtEnds);
+		
+		JButton btnRefresh = new JButton("Refresh");
+		btnRefresh.setBounds(167, 36, 117, 50);
+		panelPeriod.add(btnRefresh);
+		
+		JPanel panelIncome = new JPanel();
+		panelIncome.setBorder(new TitledBorder(null, "Incomes", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		panelIncome.setBounds(12, 141, 294, 422);
+		getContentPane().add(panelIncome);
+		panelIncome.setLayout(null);
+		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(12, 25, 270, 370);
+		panelIncome.add(scrollPane);
+		
+		tbIncome = new JTable();
+		tbIncome.setModel(new DefaultTableModel(
+			new Object[][] {
+				{null, null},
+				{null, null},
+				{null, null},
+				{null, null},
+				{null, null},
+				{null, null},
+				{null, null},
+				{null, null},
+				{null, null},
+				{null, null},
+				{null, null},
+				{null, null},
+				{null, null},
+				{null, null},
+				{null, null},
+				{null, null},
+				{null, null},
+				{null, null},
+				{null, null},
+				{null, null},
+				{null, null},
+				{null, null},
+				{null, null},
+				{null, null},
+				{null, null},
+				{null, null},
+				{null, null},
+				{null, null},
+				{null, null},
+				{null, null},
+			},
+			new String[] {
+				"Name", "Value"
+			}
+		));
+		tbIncome.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		scrollPane.setViewportView(tbIncome);
+		
+		JPanel panelExpense = new JPanel();
+		panelExpense.setBorder(new TitledBorder(new LineBorder(new Color(184, 207, 229)), "Expenses", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(51, 51, 51)));
+		panelExpense.setBounds(306, 141, 294, 422);
+		getContentPane().add(panelExpense);
+		panelExpense.setLayout(null);
+		
+		JScrollPane scrollPane_1 = new JScrollPane();
+		scrollPane_1.setBounds(12, 26, 270, 370);
+		panelExpense.add(scrollPane_1);
+		
+		tbExpense = new JTable();
+		tbExpense.setModel(new DefaultTableModel(
+			new Object[][] {
+				{null, null},
+				{null, null},
+				{null, null},
+				{null, null},
+				{null, null},
+				{null, null},
+				{null, null},
+				{null, null},
+				{null, null},
+				{null, null},
+				{null, null},
+				{null, null},
+				{null, null},
+				{null, null},
+				{null, null},
+				{null, null},
+				{null, null},
+				{null, null},
+				{null, null},
+				{null, null},
+				{null, null},
+				{null, null},
+				{null, null},
+				{null, null},
+				{null, null},
+				{null, null},
+				{null, null},
+				{null, null},
+				{null, null},
+				{null, null},
+			},
+			new String[] {
+				"Name", "Value"
+			}
+		));
+		scrollPane_1.setViewportView(tbExpense);
 	}
 	
 	public User getUser() {
