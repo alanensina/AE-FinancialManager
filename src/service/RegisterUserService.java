@@ -13,10 +13,13 @@ public class RegisterUserService {
 	}
 
 	public boolean validateUser(User user) {
-		if (validateFirstName(user.getName()) && validateLastName(user.getSurname()) && validateEmail(user.getEmail())
-				&&  validateProfession(user.getProfession())
-				&& validateUsername(user.getUsername()) && validatePassword(user.getPassword())
-				&& validatePhone(user.getPhone())) {
+		if (validateFirstName(user.getName()) &&
+			validateLastName(user.getSurname()) && 
+			validateEmail(user.getEmail()) &&
+			validateProfession(user.getProfession()) &&
+			 validateUsername(user.getUsername()) && 
+			 validatePassword(user.getPassword()) &&
+			 validatePhone(user.getPhone())) {
 			dao.register(user);
 			return true;
 		} else {

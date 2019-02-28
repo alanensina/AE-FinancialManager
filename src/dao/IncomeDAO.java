@@ -73,7 +73,7 @@ public class IncomeDAO implements IncomeRepository {
 		User user = new User();
 		con = ConnectionFactory.getConnection();
 		PreparedStatement stmt = null;
-		String sql = "select * from expense where user = ? and date between ? and ?";
+		String sql = "select * from income where user = ? and date between ? and ?";
 		ResultSet rs = null;
 		List<Income> list = new LinkedList<>();
 
@@ -95,6 +95,7 @@ public class IncomeDAO implements IncomeRepository {
 				Income inc = new Income();
 				inc.setUser(user);
 				inc.setName(rs.getString("name"));
+				inc.setValue(rs.getDouble("value"));
 				inc.setDescription(rs.getString("description"));
 				inc.setDate(rs.getDate("date").toLocalDate()); 
 

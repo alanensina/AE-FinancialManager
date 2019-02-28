@@ -96,6 +96,7 @@ public class ExpenseDAO implements ExpenseRepository {
 				Expense exp = new Expense();
 				exp.setUser(user);
 				exp.setName(rs.getString("name"));
+				exp.setValue(rs.getDouble("value"));
 				exp.setDescription(rs.getString("description"));
 				exp.setDate(rs.getDate("date").toLocalDate()); 
 

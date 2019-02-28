@@ -97,7 +97,7 @@ public class SyntaxService {
 	 */
 	public static boolean validatePhone(String phone) {
 		if (phone.length() <= 15) {
-			return phone.matches("^\\([1-9]{2}\\) [2-9][0-9]{3,4}\\-[0-9]{4}$");
+			return phone.matches("^\\([0-9]{2}\\) [0-9][0-9]{3,4}\\-[0-9]{4}$");
 		} else {
 			JOptionPane.showMessageDialog(null, "Invalid phone length, maximum 12 characters");
 			return false;
