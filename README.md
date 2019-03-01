@@ -2,9 +2,9 @@
 A financial manager where you can manage all your income and expenses and, finally, check your entire financial statement. This is final project on the course "Academia Java", course totally focused on Java SE. The project isn't finished, but it's open to test.
 
 - Watch the video:
-[![Watch the video](https://i.imgur.com/ehMPtBW.png)](https://www.youtube.com/watch?v=LzpWpDddlVM)
+<p>[![Watch the video](https://i.imgur.com/ehMPtBW.png)](https://www.youtube.com/watch?v=LzpWpDddlVM)
 
-How to run the project:
+<p>How to run the project:
 
 - Make sure that you have installed Java and MySQL database in your machine.
 - Create a database with the following structure: <a href="https://github.com/alanensina/AE-FinancialManager/blob/master/resources/aefm_database.sql">SQL script</a>
